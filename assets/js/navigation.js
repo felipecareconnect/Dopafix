@@ -1,137 +1,117 @@
-/**
- * DopaFix — Header Navigation & Mobile Drawer Interactions
- * Architecture: Navigation Component Module
- * Goal: Accessible mobile menu toggle, active link detection, & drawer state management
- */
+/* ============================================
+   DopaFix — Navigation Behaviors
+   ============================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
-  DopaFixNav.init();
-});
+(function () {
+  'use strict';
 
-const DopaFixNav = (() => {
-  let toggleBtn = null;
-  let mobileDrawer = null;
-  let overlay = null;
-  let isOpen = false;
+  const header = document.querySelector('.js-site-header');
+  let lastScrollY = window.scrollY;
+  let ticking = false;
 
-  /**
-   * Initialize navigation elements and listeners
-   */
-  const init = () => {
-    toggleBtn = document.querySelector('.mobile-nav-toggle');
-    mobileDrawer = document.querySelector('.mobile-nav-drawer');
+  /* ------------------------------------------
+     Hide / Show Header on Scroll Direction
+     ------------------------------------------ */
+  function updateHeaderOnScroll() {
+    if (!header) return;
 
-    if (!toggleBtn || !mobileDrawer) return;
+    const currentScrollY = window.scrollY;
+    const scrollDelta = currentScrollY - lastScrollY;
 
-    createBackdropOverlay();
-    bindEvents();
-    highlightActivePage();
-  };
-
-  /**
-   * Dynamically create accessible backdrop overlay for mobile menu drawer
-   */
-  const createBackdropOverlay = () => {
-    overlay = document.createElement('div');
-    overlay.className = 'nav-backdrop-overlay';
-    overlay.style.cssText = `
-      position: fixed;
-      inset: 0;
-      background-color: var(--black-overlay);
-      backdrop-filter: blur(2px);
-      z-index: calc(var(--z-overlay) - 1);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity var(--transition-normal), visibility var(--transition-normal);
-    `;
-    document.body.appendChild(overlay);
-  };
-
-  /**
-   * Bind click, keydown, and resize event listeners
-   */
-  const bindEvents = () => {
-    toggleBtn.addEventListener('click', toggleMenu);
-    overlay.addEventListener('click', closeMenu);
-
-    // Close mobile drawer when pressing ESC key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isOpen) {
-        closeMenu();
-      }
-    });
-
-    // Close menu automatically if viewport is resized past desktop breakpoint
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 1024 && isOpen) {
-        closeMenu();
-      }
-    });
-
-    // Close drawer when clicking any link inside it
-    const drawerLinks = mobileDrawer.querySelectorAll('a');
-    drawerLinks.forEach((link) => {
-      link.addEventListener('click', closeMenu);
-    });
-  };
-
-  /**
-   * Toggle mobile navigation open/close state
-   */
-  const toggleMenu = () => {
-    if (isOpen) {
-      closeMenu();
-    } else {
-      openMenu();
+    /* Always show at top */
+    if (currentScrollY <= 10) {
+      header.style.transform = 'translateY(0)';
+      header.classList.remove('is-hidden');
+      lastScrollY = currentScrollY;
+      ticking = false;
+      return;
     }
-  };
 
-  /**
-   * Open drawer with accessible ARIA state updates
-   */
-  const openMenu = () => {
-    isOpen = true;
-    toggleBtn.classList.add('active');
-    toggleBtn.setAttribute('aria-expanded', 'true');
-    mobileDrawer.classList.add('active');
-    overlay.style.opacity = '1';
-    overlay.style.visibility = 'visible';
-    document.body.style.overflow = 'hidden'; // Lock background scrolling
-  };
+    /* Scrolling down and past threshold -> hide */
+    if (scrollDelta > 5 && currentScrollY > 100) {
+      header.style.transform = 'translateY(-100%)';
+      header.classList.add('is-hidden');
+    }
+    /* Scrolling up -> show */
+    else if (scrollDelta < -5) {
+      header.style.transform = 'translateY(0)';
+      header.classList.remove('is-hidden');
+    }
 
-  /**
-   * Close drawer and restore background scrolling
-   */
-  const closeMenu = () => {
-    isOpen = false;
-    toggleBtn.classList.remove('active');
-    toggleBtn.setAttribute('aria-expanded', 'false');
-    mobileDrawer.classList.remove('active');
-    overlay.style.opacity = '0';
-    overlay.style.visibility = 'hidden';
-    document.body.style.overflow = ''; // Restore scrolling
-  };
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
 
-  /**
-   * Automatically highlight active navigation link based on window path
-   */
-  const highlightActivePage = () => {
-    const currentPath = window.location.pathname;
-    const allNavLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeaderOnScroll);
+      ticking = true;
+    }
+  });
 
-    allNavLinks.forEach((link) => {
-      const href = link.getAttribute('href');
-      if (href && (currentPath.endsWith(href) || (href === 'index.html' && (currentPath.endsWith('/') || currentPath === '')))) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
+  /* ------------------------------------------
+     Highlight Current Section in Nav
+     (for pages with in-page anchor sections)
+     ------------------------------------------ */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.site-nav__link[href^="#"], .mobile-nav__link[href^="#"]');
+
+  function highlightCurrentSection() {
+    let current = '';
+    const scrollPos = window.scrollY + 120;
+
+    sections.forEach(function (section) {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
       }
     });
-  };
 
-  return {
-    init,
-    openMenu,
-    closeMenu,
-  };
+    navLinks.forEach(function (link) {
+      link.classList.remove('is-active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('is-active');
+      }
+    });
+  }
+
+  if (sections.length > 0 && navLinks.length > 0) {
+    window.addEventListener('scroll', function () {
+      window.requestAnimationFrame(highlightCurrentSection);
+    });
+    highlightCurrentSection();
+  }
+
+  /* ------------------------------------------
+     Scroll-to-Top Button
+     ------------------------------------------ */
+  const scrollTopBtn = document.querySelector('.js-scroll-top');
+
+  function toggleScrollTopBtn() {
+    if (!scrollTopBtn) return;
+    if (window.scrollY > 600) {
+      scrollTopBtn.classList.add('is-visible');
+      scrollTopBtn.setAttribute('aria-hidden', 'false');
+    } else {
+      scrollTopBtn.classList.remove('is-visible');
+      scrollTopBtn.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  if (scrollTopBtn) {
+    window.addEventListener('scroll', function () {
+      window.requestAnimationFrame(toggleScrollTopBtn);
+    });
+
+    scrollTopBtn.addEventListener('click', function () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    toggleScrollTopBtn();
+  }
+
 })();

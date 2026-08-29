@@ -1,12 +1,7 @@
-/* ==========================================================================
-   DopaFix — CSS Reset & Modern Standardizations
-   Architecture: CSS Reset Layer
-   Goal: Cross-browser normalization, predictable sizing, & ADHD accessibility
-   ========================================================================== */
+/* ============================================
+   DopaFix — CSS Reset & Base Normalization
+   ============================================ */
 
-/* ------------------------------------------------------------------------
-   1. BOX SIZING & MARGIN NORMALIZATION
-   ------------------------------------------------------------------------ */
 *,
 *::before,
 *::after {
@@ -15,54 +10,24 @@
   padding: 0;
 }
 
-/* ------------------------------------------------------------------------
-   2. DOCUMENT & ROOT SETUP
-   ------------------------------------------------------------------------ */
 html {
-  font-size: 100%; /* 16px default browser base */
-  scroll-behavior: smooth;
+  font-size: 100%;
   -webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  color-scheme: light;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
   min-height: 100vh;
-  text-rendering: optimizeSpeed;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: var(--line-height-body, 1.6);
-  font-family: var(--font-body, 'Inter', sans-serif);
-  color: var(--ink, #202B25);
-  background-color: var(--vanilla-light, #FBF8F0);
-  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
 }
 
-/* ------------------------------------------------------------------------
-   3. TYPOGRAPHY & TEXT ELEMENTS
-   ------------------------------------------------------------------------ */
-h1, h2, h3, h4, h5, h6 {
-  overflow-wrap: break-word;
-}
-
-p, h1, h2, h3, h4, h5, h6 {
-  overflow-wrap: break-word;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-  background-color: transparent;
-}
-
-b, strong {
-  font-weight: var(--weight-bold, 700);
-}
-
-/* ------------------------------------------------------------------------
-   4. MEDIA & EMBEDDED ELEMENTS
-   ------------------------------------------------------------------------ */
 img,
 picture,
 video,
@@ -73,13 +38,6 @@ svg {
   height: auto;
 }
 
-iframe {
-  border: 0;
-}
-
-/* ------------------------------------------------------------------------
-   5. FORM & BUTTON RESET
-   ------------------------------------------------------------------------ */
 input,
 button,
 textarea,
@@ -87,75 +45,66 @@ select {
   font: inherit;
   color: inherit;
   letter-spacing: inherit;
+}
+
+button {
+  cursor: pointer;
   background: none;
   border: none;
+  appearance: none;
 }
 
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  cursor: pointer;
-  -webkit-appearance: button;
-  appearance: button;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-button:disabled,
-[type="button"]:disabled,
-[type="reset"]:disabled,
-[type="submit"]:disabled {
-  cursor: not-allowed;
-}
-
-textarea {
-  resize: vertical;
-}
-
-/* Remove default browser radio/checkbox styles where custom styling applies */
-input[type="checkbox"],
-input[type="radio"] {
-  cursor: pointer;
-}
-
-/* ------------------------------------------------------------------------
-   6. LISTS & TABLES
-   ------------------------------------------------------------------------ */
 ul,
 ol {
   list-style: none;
 }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-text);
+  text-wrap: balance;
 }
 
-/* ------------------------------------------------------------------------
-   7. ACCESSIBILITY & FOCUS REDUCTION
-   ------------------------------------------------------------------------ */
-/* Remove outline for non-keyboard focus while retaining accessible visible focus */
-:focus:not(:focus-visible) {
-  outline: none;
+p {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
 }
 
 :focus-visible {
-  outline: 3px solid var(--green-primary, #3F7655);
-  outline-offset: 3px;
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm);
 }
 
-/* Respect user preferences for reduced motion (essential for ADHD & cognitive comfort) */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
