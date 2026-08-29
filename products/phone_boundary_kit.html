@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phone Boundary Kit — DopaFix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-500: #3F7655;
+  --green-700: #244936;
+  --green-100: #DCE9DE;
+  --vanilla-300: #F7F1E3;
+  --vanilla-100: #FBF8F0;
+  --vanilla-400: #E9DDC8;
+  --terracotta-500: #D9785F;
+  --terracotta-300: #E9A18D;
+  --ink-900: #202B25;
+  --ink-600: #687169;
+  --font-heading: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+@page { size: A4; margin: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 10.5pt;
+  line-height: 1.55;
+  color: var(--ink-900);
+  background: #e5e5e5;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 20mm;
+  margin: 10mm auto;
+  background: var(--vanilla-100);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  position: relative;
+  page-break-after: always;
+  overflow: hidden;
+}
+
+.page:last-child { page-break-after: auto; }
+
+/* Cover */
+.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--ink-900);
+  color: var(--vanilla-100);
+}
+
+.cover__logo {
+  font-family: var(--font-heading);
+  font-size: 13pt;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green-500);
+  margin-bottom: 50px;
+}
+
+.cover__title {
+  font-family: var(--font-heading);
+  font-size: 34pt;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  color: #fff;
+}
+
+.cover__subtitle {
+  font-size: 12pt;
+  color: var(--vanilla-400);
+  max-width: 380px;
+  line-height: 1.6;
+}
+
+.cover__visual {
+  margin: 45px 0;
+  width: 180px;
+  height: 120px;
+  border: 3px solid var(--vanilla-400);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cover__visual::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background: var(--vanilla-400);
+  border-radius: 2px;
+}
+
+.cover__visual-text {
+  font-family: var(--font-heading);
+  font-size: 11pt;
+  font-weight: 700;
+  color: var(--vanilla-400);
+  margin-top: 8px;
+}
+
+.cover__visual-lock {
+  font-size: 24pt;
+  margin-top: 4px;
+}
+
+.cover__meta {
+  position: absolute;
+  bottom: 24mm;
+  font-size: 9pt;
+  color: var(--vanilla-400);
+  opacity: 0.6;
+}
+
+/* Section dividers */
+.section-divider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--ink-900);
+  color: var(--vanilla-100);
+}
+
+.section-divider__number {
+  font-family: var(--font-heading);
+  font-size: 64pt;
+  font-weight: 800;
+  opacity: 0.2;
+  line-height: 1;
+  margin-bottom: 12px;
+  color: var(--green-500);
+}
+
+.section-divider__title {
+  font-family: var(--font-heading);
+  font-size: 22pt;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.section-divider__desc {
+  font-size: 11pt;
+  opacity: 0.85;
+  max-width: 380px;
+}
+
+/* Content pages */
+.content h2 {
+  font-family: var(--font-heading);
+  font-size: 17pt;
+  font-weight: 700;
+  color: var(--green-700);
+  margin-bottom: 14px;
+  margin-top: 0;
+}
+
+.content h3 {
+  font-family: var(--font-heading);
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin-bottom: 8px;
+  margin-top: 18px;
+}
+
+.content h3:first-child { margin-top: 0; }
+
+.content p {
+  margin-bottom: 12px;
+  color: var(--ink-600);
+}
+
+.content p strong { color: var(--ink-900); font-weight: 600; }
+
+.content ul, .content ol {
+  margin-bottom: 12px;
+  padding-left: 20px;
+  color: var(--ink-600);
+}
+
+.content li { margin-bottom: 5px; }
+.content li::marker { color: var(--green-500); }
+
+/* Boxes */
+.warm-box {
+  background: var(--vanilla-300);
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin: 14px 0;
+}
+
+.warm-box__title {
+  font-family: var(--font-heading);
+  font-size: 10.5pt;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--ink-900);
+}
+
+.quote-box {
+  background: var(--green-100);
+  border-left: 4px solid var(--green-500);
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--green-700);
+  font-size: 10.5pt;
+}
+
+.alert-box {
+  background: #fdf2ee;
+  border-left: 4px solid var(--terracotta-500);
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  color: #8a4a3a;
+  font-size: 10.5pt;
+}
+
+/* Worksheets */
+.worksheet {
+  border: 1.5px dashed var(--vanilla-400);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 14px 0;
+  background: #fff;
+}
+
+.worksheet__title {
+  font-family: var(--font-heading);
+  font-size: 11pt;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--green-700);
+}
+
+.worksheet__prompt {
+  font-size: 9.5pt;
+  color: var(--ink-600);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.worksheet__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.worksheet__line {
+  border-bottom: 1px solid var(--vanilla-400);
+  height: 22px;
+}
+
+/* Checklist */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.checklist__box {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--green-500);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checklist__text {
+  font-size: 10pt;
+  color: var(--ink-600);
+  line-height: 1.45;
+}
+
+/* Agreement card */
+.agreement-card {
+  background: #fff;
+  border: 2px solid var(--ink-900);
+  border-radius: 10px;
+  padding: 18px;
+  margin: 14px 0;
+}
+
+.agreement-card__title {
+  font-family: var(--font-heading);
+  font-size: 12pt;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--ink-900);
+}
+
+.agreement-card__text {
+  font-size: 10pt;
+  color: var(--ink-600);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.agreement-card__signature {
+  border-top: 1px solid var(--vanilla-400);
+  padding-top: 10px;
+  font-size: 9pt;
+  color: var(--ink-600);
+}
+
+/* Phone screen mockup */
+.phone-mockup {
+  width: 140px;
+  height: 220px;
+  border: 2px solid var(--ink-900);
+  border-radius: 16px;
+  margin: 14px auto;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 8px;
+  position: relative;
+}
+
+.phone-mockup::before {
+  content: '';
+  width: 30px;
+  height: 4px;
+  background: var(--vanilla-400);
+  border-radius: 2px;
+  margin-bottom: 8px;
+}
+
+.phone-mockup__app {
+  width: 100%;
+  height: 28px;
+  background: var(--vanilla-300);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 7pt;
+  color: var(--ink-600);
+}
+
+.phone-mockup__app--blocked {
+  background: var(--terracotta-300);
+  opacity: 0.6;
+}
+
+.phone-mockup__app--allowed {
+  background: var(--green-100);
+}
+
+/* Grid */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.grid-item {
+  background: #fff;
+  border: 1.5px solid var(--vanilla-400);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.grid-item__label {
+  font-family: var(--font-heading);
+  font-size: 8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-600);
+  margin-bottom: 6px;
+}
+
+.grid-item__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.grid-item__line {
+  border-bottom: 1px solid var(--vanilla-400);
+  height: 16px;
+}
+
+/* Page numbers */
+.page-number {
+  position: absolute;
+  bottom: 12mm;
+  right: 20mm;
+  font-size: 9pt;
+  color: var(--ink-600);
+  opacity: 0.5;
+}
+
+/* Print */
+@media print {
+  body { background: white; }
+  .page {
+    margin: 0;
+    box-shadow: none;
+    width: 210mm;
+    min-height: 297mm;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+}
+
+@media screen {
+  .page { margin-bottom: 18px; }
+}
+
+@media (max-width: 600px) {
+  .page { width: 100%; padding: 14mm; margin: 0; box-shadow: none; min-height: auto; }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="page cover">
+  <div class="cover__logo">DopaFix</div>
+  <h1 class="cover__title">Phone Boundary<br>Kit</h1>
+  <p class="cover__subtitle">Printable phone-use agreements, screen-time checklists, and distraction-interruption cards for your workspace.</p>
+  <div class="cover__visual">
+    <div class="cover__visual-text">Phone</div>
+    <div class="cover__visual-lock">🔒</div>
+  </div>
+  <div class="cover__meta">Digital Workbook · 20 Pages · August 2026</div>
+</div>
+
+<!-- ==================== HOW TO USE ==================== -->
+<div class="page content">
+  <h2>How to use this kit</h2>
+  <p>Your phone is not the enemy. It is a tool that has been engineered to capture your attention. The problem is not that you are weak. The problem is that your brain is fighting an army of designers whose full-time job is to keep you scrolling.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">The goal of this kit</div>
+    <p style="margin-bottom:0;">Not to eliminate phone use. Not to shame you for screen time. The goal is to <strong>create intentional boundaries</strong> — spaces and times where your phone serves you, and spaces and times where it does not.</p>
+  </div>
+
+  <h3>What is in this kit</h3>
+  <ul>
+    <li><strong>The Phone-Use Agreement</strong> — A personal contract with yourself about when, where, and how you use your phone.</li>
+    <li><strong>The Screen-Time Checklist</strong> — A daily or weekly audit to notice patterns without judgment.</li>
+    <li><strong>Distraction-Interruption Cards</strong> — Physical cards to place around your workspace as visual reminders and friction creators.</li>
+    <li><strong>The App Audit</strong> — A structured review of which apps serve you and which ones drain you.</li>
+    <li><strong>Emergency Protocols</strong> — For when you pick up your phone without thinking and need a way back.</li>
+  </ul>
+
+  <h3>How to start</h3>
+  <ol>
+    <li>Pick ONE boundary to implement this week. Just one.</li>
+    <li>Print the relevant cards and place them where you will see them.</li>
+    <li>Complete the Phone-Use Agreement. Sign it. Post it somewhere visible.</li>
+    <li>Use the Screen-Time Checklist for three days. Notice, don't judge.</li>
+  </ol>
+
+  <div class="quote-box">
+    "The goal is not to use your phone less. The goal is to use your phone on purpose."
+  </div>
+
+  <div class="page-number">2</div>
+</div>
+
+<!-- ==================== SECTION 1 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">01</div>
+  <h2 class="section-divider__title">The Phone-Use Agreement</h2>
+  <p class="section-divider__desc">A personal contract with yourself about when, where, and how you use your phone.</p>
+</div>
+
+<!-- ==================== AGREEMENT GUIDE ==================== -->
+<div class="page content">
+  <h2>The phone-use agreement</h2>
+  <p>Willpower is unreliable. Boundaries are not. This agreement exists because decisions made in advance are easier to keep than decisions made in the moment.</p>
+
+  <h3>How to write your agreement</h3>
+  <ol>
+    <li>Be specific. "Use my phone less" is not a boundary. "No phone in bed" is.</li>
+    <li>Be realistic. If you set a boundary you cannot keep, you will abandon the whole system.</li>
+    <li>Be kind. This is not a punishment. It is a support structure.</li>
+    <li>Be visible. Post this agreement where you will see it daily.</li>
+  </ol>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Agreement categories</div>
+    <p style="margin-bottom:4px;"><strong>Time boundaries:</strong> Specific hours when the phone is off-limits (meals, first hour after waking, last hour before sleep).</p>
+    <p style="margin-bottom:4px;"><strong>Space boundaries:</strong> Physical locations where the phone does not go (bedroom, dinner table, desk during focus blocks).</p>
+    <p style="margin-bottom:0;"><strong>Activity boundaries:</strong> Activities where the phone is not invited (conversations, walks, creative work, reading).</p>
+  </div>
+
+  <div class="alert-box">
+    <strong>Important:</strong> This agreement is with yourself. You can renegotiate it anytime. If a boundary isn't working, change it. The agreement serves you. You do not serve the agreement.
+  </div>
+
+  <div class="page-number">4</div>
+</div>
+
+<!-- ==================== AGREEMENT WORKSHEET ==================== -->
+<div class="page content">
+  <h2>My phone-use agreement</h2>
+  <p style="font-size:9.5pt;color:var(--ink-600);margin-bottom:14px;">Date: ______________________ &nbsp;&nbsp; Review date: ______________________</p>
+
+  <div class="agreement-card">
+    <div class="agreement-card__title">Time Boundaries</div>
+    <div class="agreement-card__text">I will not use my phone during the following times:</div>
+    <div class="checklist">
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+    </div>
+  </div>
+
+  <div class="agreement-card">
+    <div class="agreement-card__title">Space Boundaries</div>
+    <div class="agreement-card__text">My phone does not go in these spaces:</div>
+    <div class="checklist">
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+    </div>
+  </div>
+
+  <div class="agreement-card">
+    <div class="agreement-card__title">Activity Boundaries</div>
+    <div class="agreement-card__text">My phone stays away during these activities:</div>
+    <div class="checklist">
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+    </div>
+  </div>
+
+  <div class="agreement-card">
+    <div class="agreement-card__title">If I break a boundary</div>
+    <div class="agreement-card__text">I will not shame myself. Instead, I will:</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+    <div class="agreement-card__signature">Signed: ______________________ &nbsp;&nbsp; Date: ______________________</div>
+  </div>
+
+  <div class="page-number">5</div>
+</div>
+
+<!-- ==================== SECTION 2 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">02</div>
+  <h2 class="section-divider__title">The Screen-Time Checklist</h2>
+  <p class="section-divider__desc">A daily or weekly audit to notice patterns without judgment.</p>
+</div>
+
+<!-- ==================== SCREEN-TIME GUIDE ==================== -->
+<div class="page content">
+  <h2>The screen-time checklist</h2>
+  <p>Most people have no idea how they actually use their phone. They know it feels like "too much," but they cannot name the when, where, or why. This checklist creates that visibility.</p>
+
+  <h3>How to use it</h3>
+  <ul>
+    <li>Complete this checklist once a day for three days. Morning, midday, or evening — whatever you will actually do.</li>
+    <li>Be honest. There is no score. You are gathering data about yourself.</li>
+    <li>After three days, look for patterns. When do you pick up your phone most? What triggers it?</li>
+    <li>Use the patterns to adjust your Phone-Use Agreement.</li>
+  </ul>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Common trigger patterns</div>
+    <p style="margin-bottom:4px;"><strong>Boredom:</strong> Empty moments feel uncomfortable. The phone is an escape.</p>
+    <p style="margin-bottom:4px;"><strong>Anxiety:</strong> Checking the phone provides a false sense of control.</p>
+    <p style="margin-bottom:4px;"><strong>Transition:</strong> Moving between tasks feels hard. The phone is a procrastination bridge.</p>
+    <p style="margin-bottom:0;"><strong>Social:</strong> FOMO, loneliness, or the need for connection drives compulsive checking.</p>
+  </div>
+
+  <div class="page-number">7</div>
+</div>
+
+<!-- ==================== SCREEN-TIME WORKSHEET ==================== -->
+<div class="page content">
+  <h2>Screen-time checklist</h2>
+  <p style="font-size:9.5pt;color:var(--ink-600);margin-bottom:12px;">Day: ___________ &nbsp;&nbsp; Date: ___________</p>
+
+  <div class="worksheet">
+    <div class="worksheet__title">Morning (wake → noon)</div>
+    <div class="checklist">
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">I checked my phone within 10 minutes of waking.</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">I used my phone during breakfast or coffee.</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">I picked up my phone without a specific purpose.</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">I felt anxious or stressed after using my phone.</div></div>
+    </div>
+    <div style="margin-top:8px;font-size:9pt;color:var(--ink-600);">Main trigger: ______________________</div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">Midday (noon → 6pm)</div>
+    <div class="checklist">
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">I used my phone during a work or study block.</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">I lost track of time while on my phone.</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">I checked my phone during a conversation.</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">I used my phone to avoid a task I didn't want to start.</div></div>
+    </div>
+    <div style="margin-top:8px;font-size:9pt;color:var(--ink-600);">Main trigger: ______________________</div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">Evening (6pm → sleep)</div>
+    <div class="checklist">
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">I used my phone during dinner.</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">I scrolled on my phone in bed before sleeping.</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">I intended to stop but kept scrolling anyway.</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">My phone was the last thing I looked at before sleep.</div></div>
+    </div>
+    <div style="margin-top:8px;font-size:9pt;color:var(--ink-600);">Main trigger: ______________________</div>
+  </div>
+
+  <div class="page-number">8</div>
+</div>
+
+<!-- ==================== SCREEN-TIME REFLECTION ==================== -->
+<div class="page content">
+  <h2>Screen-time reflection</h2>
+  <p>After completing the checklist for three days, answer these questions.</p>
+
+  <div class="worksheet">
+    <div class="worksheet__title">My biggest phone trigger</div>
+    <div class="worksheet__prompt">The one thing that most often leads to unintended phone use.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">My phone-free safe zone</div>
+    <div class="worksheet__prompt">One time or place where I naturally don't use my phone. How can I protect or expand it?</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">One boundary I want to try</div>
+    <div class="worksheet__prompt">Start small. One change. One week.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">What I will do instead</div>
+    <div class="worksheet__prompt">When the trigger hits, what is my alternative action? (Example: "When I want to check my phone during work, I will stand up and stretch for 30 seconds.")</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">9</div>
+</div>
+
+<!-- ==================== SECTION 3 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">03</div>
+  <h2 class="section-divider__title">The App Audit</h2>
+  <p class="section-divider__desc">Which apps serve you and which ones drain you.</p>
+</div>
+
+<!-- ==================== APP AUDIT ==================== -->
+<div class="page content">
+  <h2>The app audit</h2>
+  <p>Not all screen time is equal. Some apps give you energy, information, or connection. Others take without giving back. This audit helps you tell the difference.</p>
+
+  <h3>The three categories</h3>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Green apps — Serve me</div>
+    <p style="margin-bottom:0;">Apps you use intentionally, that leave you feeling better, and that have a clear purpose. Examples: meditation apps, maps, work tools, messaging close friends.</p>
+  </div>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Yellow apps — Sometimes serve me</div>
+    <p style="margin-bottom:0;">Apps with a valid purpose but a high risk of overuse. Examples: email, news, social media with real connections, entertainment.</p>
+  </div>
+
+  <div class="alert-box">
+    <div class="warm-box__title" style="color:#8a4a3a;">Red apps — Drain me</div>
+    <p style="margin-bottom:0;">Apps you use compulsively, that leave you feeling worse, and that have no clear purpose in your life. Examples: infinite scroll feeds, comparison-driven social media, games with addictive mechanics.</p>
+  </div>
+
+  <h3>What to do with the categories</h3>
+  <ul>
+    <li><strong>Green:</strong> Keep. Protect. Use freely.</li>
+    <li><strong>Yellow:</strong> Restrict. Set time limits. Use with intention.</li>
+    <li><strong>Red:</strong> Delete, hide, or heavily restrict. These are the apps that most often break your boundaries.</li>
+  </ul>
+
+  <div class="page-number">11</div>
+</div>
+
+<!-- ==================== APP AUDIT WORKSHEET ==================== -->
+<div class="page content">
+  <h2>My app audit</h2>
+  <p>Go through your phone. List every app you use regularly. Be honest.</p>
+
+  <div class="grid-2">
+    <div class="grid-item" style="border-color:var(--green-500);background:var(--green-100);">
+      <div class="grid-item__label" style="color:var(--green-700);">🟢 Green — Serve me</div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+    <div class="grid-item" style="border-color:var(--vanilla-400);background:var(--vanilla-300);">
+      <div class="grid-item__label">🟡 Yellow — Sometimes serve me</div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-item" style="border-color:var(--terracotta-500);background:#fdf2ee;margin:10px 0;">
+    <div class="grid-item__label" style="color:var(--terracotta-500);">🔴 Red — Drain me</div>
+    <div class="grid-item__lines">
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">My action plan</div>
+    <div class="worksheet__prompt">For each red app, decide: delete, hide, or restrict. For each yellow app, set a time limit or usage rule.</div>
+    <div class="grid-2">
+      <div class="grid-item" style="border:none;background:transparent;padding:0;">
+        <div class="grid-item__label">App</div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+      <div class="grid-item" style="border:none;background:transparent;padding:0;">
+        <div class="grid-item__label">Action</div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-number">12</div>
+</div>
+
+<!-- ==================== SECTION 4 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">04</div>
+  <h2 class="section-divider__title">Distraction-Interruption Cards</h2>
+  <p class="section-divider__desc">Physical cards to place around your workspace as visual reminders and friction creators.</p>
+</div>
+
+<!-- ==================== CARDS GUIDE ==================== -->
+<div class="page content">
+  <h2>Distraction-interruption cards</h2>
+  <p>These cards are designed to be printed, cut out, and placed in strategic locations: your desk, your bedside table, your kitchen counter, your car dashboard. They create <strong>visual friction</strong> — a moment of pause between impulse and action.</p>
+
+  <h3>How to use them</h3>
+  <ol>
+    <li>Print the cards on the following pages.</li>
+    <li>Cut them out along the dotted lines.</li>
+    <li>Place them where you most often pick up your phone without thinking.</li>
+    <li>When you see a card, pause. Ask the question on the card. Answer honestly.</li>
+    <li>If the answer is "no reason," put the phone down. If there is a real reason, use it with intention.</li>
+  </ol>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Why physical cards work</div>
+    <p style="margin-bottom:0;">Digital reminders are too easy to swipe away. A physical card in your environment creates a real-world pause that a notification cannot. It interrupts the automatic loop: trigger → reach for phone → scroll.</p>
+  </div>
+
+  <h3>The cards</h3>
+  <ul>
+    <li><strong>The Pause Card</strong> — For your desk. Asks: "Why am I picking this up?"</li>
+    <li><strong>The Bedside Card</strong> — For your nightstand. Asks: "Is this more important than sleep?"</li>
+    <li><strong>The Transition Card</strong> — For doorways and entrances. Asks: "Am I escaping or arriving?"</li>
+    <li><strong>The Focus Card</strong> — For your workspace. States: "This block is phone-free."</li>
+  </ul>
+
+  <div class="page-number">14</div>
+</div>
+
+<!-- ==================== CARDS PAGE 1 ==================== -->
+<div class="page content">
+  <h2>Printable cards — Page 1</h2>
+  <p style="font-size:9pt;color:var(--ink-600);margin-bottom:14px;">Cut along the dashed lines. Laminate if possible. Place where you need them most.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+    <div style="border:2px dashed var(--vanilla-400);border-radius:10px;padding:20px;text-align:center;background:#fff;">
+      <div style="font-size:28pt;margin-bottom:10px;">🛑</div>
+      <div style="font-family:var(--font-heading);font-size:13pt;font-weight:700;margin-bottom:8px;">The Pause Card</div>
+      <div style="font-size:10pt;color:var(--ink-600);line-height:1.5;">Before you pick up your phone, ask:<br><br><strong>"Why am I picking this up right now?"</strong><br><br>If the answer is "I don't know," put it down.</div>
+    </div>
+
+    <div style="border:2px dashed var(--vanilla-400);border-radius:10px;padding:20px;text-align:center;background:#fff;">
+      <div style="font-size:28pt;margin-bottom:10px;">🌙</div>
+      <div style="font-family:var(--font-heading);font-size:13pt;font-weight:700;margin-bottom:8px;">The Bedside Card</div>
+      <div style="font-size:10pt;color:var(--ink-600);line-height:1.5;">Before bed or upon waking, ask:<br><br><strong>"Is this more important than rest?"</strong><br><br>Sleep is not negotiable. Scrolling is.</div>
+    </div>
+
+    <div style="border:2px dashed var(--vanilla-400);border-radius:10px;padding:20px;text-align:center;background:#fff;">
+      <div style="font-size:28pt;margin-bottom:10px;">🚪</div>
+      <div style="font-family:var(--font-heading);font-size:13pt;font-weight:700;margin-bottom:8px;">The Transition Card</div>
+      <div style="font-size:10pt;color:var(--ink-600);line-height:1.5;">When entering or leaving a space, ask:<br><br><strong>"Am I escaping or arriving?"</strong><br><br>Be present in the transition.</div>
+    </div>
+
+    <div style="border:2px dashed var(--vanilla-400);border-radius:10px;padding:20px;text-align:center;background:#fff;">
+      <div style="font-size:28pt;margin-bottom:10px;">🎯</div>
+      <div style="font-family:var(--font-heading);font-size:13pt;font-weight:700;margin-bottom:8px;">The Focus Card</div>
+      <div style="font-size:10pt;color:var(--ink-600);line-height:1.5;">During work or deep focus:<br><br><strong>"This block is phone-free."</strong><br><br>The phone goes face-down in another room.</div>
+    </div>
+  </div>
+
+  <div class="page-number">15</div>
+</div>
+
+<!-- ==================== CARDS PAGE 2 ==================== -->
+<div class="page content">
+  <h2>Printable cards — Page 2</h2>
+  <p style="font-size:9pt;color:var(--ink-600);margin-bottom:14px;">Additional cards for specific situations.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+    <div style="border:2px dashed var(--vanilla-400);border-radius:10px;padding:20px;text-align:center;background:#fff;">
+      <div style="font-size:28pt;margin-bottom:10px;">🍽️</div>
+      <div style="font-family:var(--font-heading);font-size:13pt;font-weight:700;margin-bottom:8px;">The Meal Card</div>
+      <div style="font-size:10pt;color:var(--ink-600);line-height:1.5;">At the table, ask:<br><br><strong>"Who or what is in front of me?"</strong><br><br>Food and people deserve attention. Screens do not.</div>
+    </div>
+
+    <div style="border:2px dashed var(--vanilla-400);border-radius:10px;padding:20px;text-align:center;background:#fff;">
+      <div style="font-size:28pt;margin-bottom:10px;">⏱️</div>
+      <div style="font-family:var(--font-heading);font-size:13pt;font-weight:700;margin-bottom:8px;">The Timer Card</div>
+      <div style="font-size:10pt;color:var(--ink-600);line-height:1.5;">Before opening any app, ask:<br><br><strong>"How long am I giving this?"</strong><br><br>Set a timer. Honor it when it rings.</div>
+    </div>
+
+    <div style="border:2px dashed var(--vanilla-400);border-radius:10px;padding:20px;text-align:center;background:#fff;">
+      <div style="font-size:28pt;margin-bottom:10px;">🚶</div>
+      <div style="font-family:var(--font-heading);font-size:13pt;font-weight:700;margin-bottom:8px;">The Walk Card</div>
+      <div style="font-size:10pt;color:var(--ink-600);line-height:1.5;">Before leaving the house, ask:<br><br><strong>"Do I need this in my pocket?"</strong><br><br>Some walks are better without it.</div>
+    </div>
+
+    <div style="border:2px dashed var(--vanilla-400);border-radius:10px;padding:20px;text-align:center;background:#fff;">
+      <div style="font-size:28pt;margin-bottom:10px;">💬</div>
+      <div style="font-family:var(--font-heading);font-size:13pt;font-weight:700;margin-bottom:8px;">The Conversation Card</div>
+      <div style="font-size:10pt;color:var(--ink-600);line-height:1.5;">When with another person, ask:<br><br><strong>"What is more interesting than this human?"</strong><br><br>Usually, nothing.</div>
+    </div>
+  </div>
+
+  <div class="page-number">16</div>
+</div>
+
+<!-- ==================== SECTION 5 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">05</div>
+  <h2 class="section-divider__title">Emergency Protocols</h2>
+  <p class="section-divider__desc">For when you pick up your phone without thinking and need a way back.</p>
+</div>
+
+<!-- ==================== EMERGENCY PROTOCOLS ==================== -->
+<div class="page content">
+  <h2>Emergency protocols</h2>
+  <p>These protocols are for the moments when you realize you have been scrolling for twenty minutes and have no idea how you got there. They are not about prevention. They are about recovery.</p>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--terracotta-500);">A</div>
+      <div class="step-card__title">The Scroll Spiral</div>
+    </div>
+    <div class="step-card__desc">
+      <p style="margin-bottom:6px;">You opened one app. Now you are deep in a feed you never intended to open.</p>
+      <ol style="padding-left:18px;margin-bottom:0;">
+        <li>Don't shame yourself. It happens.</li>
+        <li>Ask: "What was I doing before I picked up my phone?"</li>
+        <li>Close the app. Not minimize. Close.</li>
+        <li>Put the phone face-down, out of reach.</li>
+        <li>Do one physical action: stand, stretch, drink water.</li>
+        <li>Decide: return to the original task, or take a real break.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--terracotta-500);">B</div>
+      <div class="step-card__title">The Phantom Check</div>
+    </div>
+    <div class="step-card__desc">
+      <p style="margin-bottom:6px;">You checked your phone for a notification. There was none. You checked again. Still none. You keep checking.</p>
+      <ol style="padding-left:18px;margin-bottom:0;">
+        <li>Recognize the loop: notification anxiety is a real trigger.</li>
+        <li>Turn the phone face-down. The screen cannot call to you if you cannot see it.</li>
+        <li>Set a "check again" timer for 30 minutes. Honor it.</li>
+        <li>Ask: "Is there a real reason I need to know this now?" Usually, no.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--terracotta-500);">C</div>
+      <div class="step-card__title">The Bedtime Hijack</div>
+    </div>
+    <div class="step-card__desc">
+      <p style="margin-bottom:6px;">You got in bed to sleep. You checked one thing. It is now an hour later.</p>
+      <ol style="padding-left:18px;margin-bottom:0;">
+        <li>Put the phone on the charger — in another room if possible.</li>
+        <li>Do not use your phone as an alarm. Buy a physical alarm clock.</li>
+        <li>If you need wind-down, use a book, not a screen.</li>
+        <li>If you absolutely must use your phone, enable grayscale mode and night mode. Make the screen as unappealing as possible.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="page-number">18</div>
+</div>
+
+<!-- ==================== CUSTOM PROTOCOL ==================== -->
+<div class="page content">
+  <h2>My custom recovery protocol</h2>
+  <p>Write your own protocol for the specific phone trap you fall into most often.</p>
+
+  <div class="worksheet">
+    <div class="worksheet__title">My most common phone trap</div>
+    <div class="worksheet__prompt">The one situation where I always lose track of time.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">My recovery steps</div>
+    <div class="worksheet__prompt">3–5 tiny steps. No shame. Just a way back.</div>
+    <div class="checklist">
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">My prevention tweak</div>
+    <div class="worksheet__prompt">One small change to my environment or phone settings that would make this trap harder to fall into.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">19</div>
+</div>
+
+<!-- ==================== CLOSING ==================== -->
+<div class="page content">
+  <h2>Your phone is a tool, not a trap</h2>
+
+  <p>The designers of your phone want your attention. That is their job. Your job is to decide when and how you give it.</p>
+
+  <p>This kit is not about becoming someone who never uses their phone. It is about becoming someone who uses their phone <strong>on purpose</strong> — with boundaries, with awareness, and with the ability to recover when autopilot takes over.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">What to remember</div>
+    <p style="margin-bottom:6px;"><strong>Boundaries, not bans.</strong> Complete phone abstinence is rarely sustainable. Boundaries are.</p>
+    <p style="margin-bottom:6px;"><strong>Environment shapes behavior.</strong> Physical cards, phone placement, and app organization matter more than willpower.</p>
+    <p style="margin-bottom:6px;"><strong>Recovery is part of the system.</strong> You will slip. The protocols exist because slipping is normal.</p>
+    <p style="margin-bottom:0;"><strong>One boundary at a time.</strong> Don't overhaul everything. Pick one agreement, one card, one protocol. Build from there.</p>
+  </div>
+
+  <div class="quote-box">
+    "You are not weak for struggling with your phone. You are human, and your phone was designed by people who understand human attention better than almost anyone on earth. Boundaries are not a sign of failure. They are a sign of self-respect."
+  </div>
+
+  <p style="margin-top:40px;text-align:center;font-size:10pt;color:var(--ink-600);">
+    <strong>DopaFix</strong><br>
+    Practical tools for the things ADHD makes harder.<br><br>
+    © 2026 DopaFix. All rights reserved.<br>
+    This workbook is for personal use only.
+  </p>
+
+  <div class="page-number">20</div>
+</div>
+
+</body>
+</html>

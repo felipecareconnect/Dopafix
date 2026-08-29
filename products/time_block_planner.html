@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Block Planner — DopaFix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-500: #3F7655;
+  --green-700: #244936;
+  --green-100: #DCE9DE;
+  --vanilla-300: #F7F1E3;
+  --vanilla-100: #FBF8F0;
+  --vanilla-400: #E9DDC8;
+  --terracotta-500: #D9785F;
+  --terracotta-300: #E9A18D;
+  --ink-900: #202B25;
+  --ink-600: #687169;
+  --font-heading: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+@page { size: A4; margin: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 10.5pt;
+  line-height: 1.55;
+  color: var(--ink-900);
+  background: #e5e5e5;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 20mm;
+  margin: 10mm auto;
+  background: var(--vanilla-100);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  position: relative;
+  page-break-after: always;
+  overflow: hidden;
+}
+
+.page:last-child { page-break-after: auto; }
+
+/* Cover */
+.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--vanilla-300);
+}
+
+.cover__logo {
+  font-family: var(--font-heading);
+  font-size: 13pt;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green-500);
+  margin-bottom: 50px;
+}
+
+.cover__title {
+  font-family: var(--font-heading);
+  font-size: 36pt;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  color: var(--ink-900);
+}
+
+.cover__subtitle {
+  font-size: 12pt;
+  color: var(--ink-600);
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+.cover__visual {
+  margin: 40px 0;
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.cover__bar {
+  width: 28px;
+  border-radius: 6px 6px 0 0;
+  background: var(--green-500);
+  opacity: 0.85;
+}
+
+.cover__meta {
+  position: absolute;
+  bottom: 24mm;
+  font-size: 9pt;
+  color: var(--ink-600);
+  opacity: 0.7;
+}
+
+/* Section dividers */
+.section-divider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--green-500);
+  color: var(--vanilla-100);
+}
+
+.section-divider__number {
+  font-family: var(--font-heading);
+  font-size: 64pt;
+  font-weight: 800;
+  opacity: 0.25;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.section-divider__title {
+  font-family: var(--font-heading);
+  font-size: 22pt;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.section-divider__desc {
+  font-size: 11pt;
+  opacity: 0.85;
+  max-width: 380px;
+}
+
+/* Content pages */
+.content h2 {
+  font-family: var(--font-heading);
+  font-size: 17pt;
+  font-weight: 700;
+  color: var(--green-700);
+  margin-bottom: 14px;
+  margin-top: 0;
+}
+
+.content h3 {
+  font-family: var(--font-heading);
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin-bottom: 8px;
+  margin-top: 18px;
+}
+
+.content h3:first-child { margin-top: 0; }
+
+.content p {
+  margin-bottom: 12px;
+  color: var(--ink-600);
+}
+
+.content p strong { color: var(--ink-900); font-weight: 600; }
+
+.content ul, .content ol {
+  margin-bottom: 12px;
+  padding-left: 20px;
+  color: var(--ink-600);
+}
+
+.content li { margin-bottom: 5px; }
+.content li::marker { color: var(--green-500); }
+
+/* Boxes */
+.warm-box {
+  background: var(--vanilla-300);
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin: 14px 0;
+}
+
+.warm-box__title {
+  font-family: var(--font-heading);
+  font-size: 10.5pt;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--ink-900);
+}
+
+.quote-box {
+  background: var(--green-100);
+  border-left: 4px solid var(--green-500);
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--green-700);
+  font-size: 10.5pt;
+}
+
+/* Time block templates */
+.time-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--green-500);
+}
+
+.time-header__title {
+  font-family: var(--font-heading);
+  font-size: 14pt;
+  font-weight: 700;
+  color: var(--green-700);
+}
+
+.time-header__date {
+  font-size: 9pt;
+  color: var(--ink-600);
+  background: var(--vanilla-300);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* Block row */
+.block-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: stretch;
+}
+
+.block-row__time {
+  width: 58px;
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+  font-size: 9pt;
+  font-weight: 700;
+  color: var(--green-500);
+  text-align: right;
+  padding-top: 10px;
+}
+
+.block-row__slot {
+  flex: 1;
+  border: 1.5px dashed var(--vanilla-400);
+  border-radius: 8px;
+  padding: 10px 14px;
+  min-height: 52px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.block-row__slot--filled {
+  background: var(--green-100);
+  border-style: solid;
+  border-color: var(--green-500);
+  border-width: 1.5px;
+}
+
+.block-row__slot-label {
+  font-family: var(--font-heading);
+  font-size: 10pt;
+  font-weight: 600;
+  color: var(--green-700);
+}
+
+/* Transition block */
+.transition-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 10px 68px;
+  padding: 8px 14px;
+  background: var(--vanilla-300);
+  border-radius: 8px;
+  border-left: 3px solid var(--terracotta-500);
+}
+
+.transition-block__icon {
+  font-size: 14pt;
+  line-height: 1;
+}
+
+.transition-block__text {
+  font-size: 9pt;
+  color: var(--ink-600);
+  font-style: italic;
+}
+
+/* Visual timeline */
+.timeline {
+  display: flex;
+  gap: 6px;
+  margin: 14px 0;
+  align-items: flex-end;
+  height: 120px;
+  padding: 14px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1.5px solid var(--vanilla-400);
+}
+
+.timeline__segment {
+  flex: 1;
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 6px;
+  position: relative;
+}
+
+.timeline__segment--focus { background: var(--green-100); border: 1.5px solid var(--green-500); }
+.timeline__segment--break { background: var(--vanilla-300); border: 1.5px dashed var(--vanilla-400); }
+.timeline__segment--transition { background: var(--terracotta-300); opacity: 0.5; border: 1.5px solid var(--terracotta-500); }
+
+.timeline__label {
+  font-size: 7pt;
+  font-weight: 600;
+  color: var(--ink-900);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.timeline__time {
+  font-size: 6.5pt;
+  color: var(--ink-600);
+  margin-top: 2px;
+}
+
+/* Checklist */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.checklist__box {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--green-500);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checklist__text {
+  font-size: 10pt;
+  color: var(--ink-600);
+  line-height: 1.45;
+}
+
+/* Weekly review grid */
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.review-grid__day {
+  background: #fff;
+  border: 1.5px solid var(--vanilla-400);
+  border-radius: 6px;
+  padding: 8px 6px;
+  text-align: center;
+  min-height: 70px;
+}
+
+.review-grid__day-name {
+  font-family: var(--font-heading);
+  font-size: 8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--green-500);
+  margin-bottom: 6px;
+}
+
+.review-grid__face {
+  font-size: 16pt;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.review-grid__line {
+  border-bottom: 1px solid var(--vanilla-400);
+  height: 14px;
+  margin: 0 2px;
+}
+
+/* Rating row */
+.rating-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.rating-row__label {
+  font-size: 9.5pt;
+  color: var(--ink-600);
+  width: 140px;
+  flex-shrink: 0;
+}
+
+.rating-row__dots {
+  display: flex;
+  gap: 6px;
+}
+
+.rating-row__dot {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--vanilla-400);
+  border-radius: 50%;
+}
+
+/* Worksheet lines */
+.worksheet {
+  border: 1.5px dashed var(--vanilla-400);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 14px 0;
+  background: #fff;
+}
+
+.worksheet__title {
+  font-family: var(--font-heading);
+  font-size: 11pt;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--green-700);
+}
+
+.worksheet__prompt {
+  font-size: 9.5pt;
+  color: var(--ink-600);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.worksheet__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.worksheet__line {
+  border-bottom: 1px solid var(--vanilla-400);
+  height: 22px;
+}
+
+/* Page numbers */
+.page-number {
+  position: absolute;
+  bottom: 12mm;
+  right: 20mm;
+  font-size: 9pt;
+  color: var(--ink-600);
+  opacity: 0.5;
+}
+
+/* Print */
+@media print {
+  body { background: white; }
+  .page {
+    margin: 0;
+    box-shadow: none;
+    width: 210mm;
+    min-height: 297mm;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+}
+
+@media screen {
+  .page { margin-bottom: 18px; }
+}
+
+@media (max-width: 600px) {
+  .page { width: 100%; padding: 14mm; margin: 0; box-shadow: none; min-height: auto; }
+  .review-grid { grid-template-columns: repeat(4, 1fr); }
+  .block-row__time { width: 46px; font-size: 8pt; }
+  .timeline { height: 90px; }
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="page cover">
+  <div class="cover__logo">DopaFix</div>
+  <h1 class="cover__title">Time Block<br>Planner</h1>
+  <p class="cover__subtitle">Visual time-blocking templates designed for brains that don't feel time passing.</p>
+  <div class="cover__visual">
+    <div class="cover__bar" style="height:40px;opacity:0.4;"></div>
+    <div class="cover__bar" style="height:70px;"></div>
+    <div class="cover__bar" style="height:55px;opacity:0.6;"></div>
+    <div class="cover__bar" style="height:85px;"></div>
+    <div class="cover__bar" style="height:45px;opacity:0.5;"></div>
+    <div class="cover__bar" style="height:65px;"></div>
+    <div class="cover__bar" style="height:35px;opacity:0.3;"></div>
+    <div class="cover__bar" style="height:75px;"></div>
+  </div>
+  <div class="cover__meta">Digital Workbook · 26 Pages · August 2026</div>
+</div>
+
+<!-- ==================== HOW TO USE ==================== -->
+<div class="page content">
+  <h2>How to use this planner</h2>
+  <p>Time blindness means time feels abstract. Hours disappear without warning. Deadlines arrive as surprises. This planner makes time <strong>visible, concrete, and external</strong> — so your brain doesn't have to hold it all.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">The core idea</div>
+    <p style="margin-bottom:0;">Instead of a to-do list, you create <strong>time containers</strong>. Each block has a start time, an end time, and one job. When the block ends, you stop — even if you're not finished. This protects against hyperfocus spirals and forgotten transitions.</p>
+  </div>
+
+  <h3>Before you begin</h3>
+  <ul>
+    <li>Use a visual timer alongside these templates — a physical sand timer, a color-changing light, or a timer app with a large display.</li>
+    <li>Don't plan every minute. Leave buffer blocks. Transitions take longer than you think.</li>
+    <li>Start with just the morning template for one week. Add the others only when the first feels natural.</li>
+    <li>Color-coding helps: one color for focus, one for breaks, one for transitions.</li>
+  </ul>
+
+  <div class="quote-box">
+    "The goal is not to control every minute. The goal is to make time feel real enough that you can work with it instead of against it."
+  </div>
+
+  <div class="page-number">2</div>
+</div>
+
+<!-- ==================== SECTION 1 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">01</div>
+  <h2 class="section-divider__title">Morning Launch</h2>
+  <p class="section-divider__desc">A gentle structure for the first two hours of your day.</p>
+</div>
+
+<!-- ==================== MORNING TEMPLATE ==================== -->
+<div class="page content">
+  <div class="time-header">
+    <div class="time-header__title">Morning Launch</div>
+    <div class="time-header__date">Date: ___________</div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">Wake</div>
+    <div class="block-row__slot block-row__slot--filled">
+      <span class="block-row__slot-label">Wake-up & body check-in</span>
+    </div>
+  </div>
+
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Transition buffer — 10 min. No screens. Just movement.</div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">+20m</div>
+    <div class="block-row__slot">
+      <span style="color:var(--ink-600);">______________________________________________</span>
+    </div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">+45m</div>
+    <div class="block-row__slot block-row__slot--filled">
+      <span class="block-row__slot-label">Morning anchor — one grounding action</span>
+    </div>
+  </div>
+
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Transition buffer — 5 min. Set intention for the first work block.</div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">+90m</div>
+    <div class="block-row__slot">
+      <span style="color:var(--ink-600);">______________________________________________</span>
+    </div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">+2h</div>
+    <div class="block-row__slot block-row__slot--filled">
+      <span class="block-row__slot-label">First focused work block (25–45 min)</span>
+    </div>
+  </div>
+
+  <div style="margin-top:18px;padding:12px;background:var(--vanilla-300);border-radius:8px;">
+    <div style="font-family:var(--font-heading);font-size:10pt;font-weight:700;margin-bottom:6px;">Morning notes</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">4</div>
+</div>
+
+<!-- ==================== MORNING BLANK ==================== -->
+<div class="page content">
+  <div class="time-header">
+    <div class="time-header__title">Morning Launch — Blank</div>
+    <div class="time-header__date">Date: ___________</div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Transition buffer: _____ min</div>
+  </div>
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Transition buffer: _____ min</div>
+  </div>
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Transition buffer: _____ min</div>
+  </div>
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Transition buffer: _____ min</div>
+  </div>
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+
+  <div style="margin-top:14px;padding:12px;background:var(--vanilla-300);border-radius:8px;">
+    <div style="font-family:var(--font-heading);font-size:10pt;font-weight:700;margin-bottom:6px;">Morning notes</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">5</div>
+</div>
+
+<!-- ==================== SECTION 2 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">02</div>
+  <h2 class="section-divider__title">Workday Blocks</h2>
+  <p class="section-divider__desc">Structured focus sessions with built-in recovery.</p>
+</div>
+
+<!-- ==================== WORKDAY TEMPLATE ==================== -->
+<div class="page content">
+  <div class="time-header">
+    <div class="time-header__title">Workday Blocks</div>
+    <div class="time-header__date">Date: ___________</div>
+  </div>
+
+  <p style="font-size:9.5pt;margin-bottom:10px;">Use this for a standard workday. Each block is a container — put one task inside. When the timer ends, stop.</p>
+
+  <div class="block-row">
+    <div class="block-row__time">Block 1</div>
+    <div class="block-row__slot block-row__slot--filled">
+      <span class="block-row__slot-label">Deep focus — 45 min</span>
+    </div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Movement break — 10 min. Stand up. Look away from the screen.</div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">Block 2</div>
+    <div class="block-row__slot">
+      <span style="color:var(--ink-600);">______________________________________________</span>
+    </div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Hydration & stretch — 10 min</div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">Block 3</div>
+    <div class="block-row__slot block-row__slot--filled">
+      <span class="block-row__slot-label">Admin / shallow work — 30 min</span>
+    </div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Lunch break — 45 min. No work. No screens if possible.</div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">Block 4</div>
+    <div class="block-row__slot">
+      <span style="color:var(--ink-600);">______________________________________________</span>
+    </div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Walk or movement — 10 min</div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">Block 5</div>
+    <div class="block-row__slot block-row__slot--filled">
+      <span class="block-row__slot-label">Final push — 30 min</span>
+    </div>
+  </div>
+
+  <div style="margin-top:12px;padding:10px;background:var(--green-100);border-radius:8px;font-size:9pt;color:var(--green-700);">
+    <strong>End-of-day ritual:</strong> Write tomorrow's first task. Close all tabs. Set a "work is over" alarm.
+  </div>
+
+  <div class="page-number">7</div>
+</div>
+
+<!-- ==================== WORKDAY BLANK ==================== -->
+<div class="page content">
+  <div class="time-header">
+    <div class="time-header__title">Workday Blocks — Blank</div>
+    <div class="time-header__date">Date: ___________</div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Break: _____ min</div>
+  </div>
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Break: _____ min</div>
+  </div>
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Break: _____ min</div>
+  </div>
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Break: _____ min</div>
+  </div>
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+
+  <div style="margin-top:14px;padding:12px;background:var(--vanilla-300);border-radius:8px;">
+    <div style="font-family:var(--font-heading);font-size:10pt;font-weight:700;margin-bottom:6px;">Workday notes</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">8</div>
+</div>
+
+<!-- ==================== SECTION 3 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">03</div>
+  <h2 class="section-divider__title">Evening Wind-Down</h2>
+  <p class="section-divider__desc">A gentle close to the day that protects tomorrow.</p>
+</div>
+
+<!-- ==================== EVENING TEMPLATE ==================== -->
+<div class="page content">
+  <div class="time-header">
+    <div class="time-header__title">Evening Wind-Down</div>
+    <div class="time-header__date">Date: ___________</div>
+  </div>
+
+  <p style="font-size:9.5pt;margin-bottom:10px;">The evening block is not about productivity. It is about creating a boundary between day and night, and setting up tomorrow for an easier start.</p>
+
+  <div class="block-row">
+    <div class="block-row__time">+0m</div>
+    <div class="block-row__slot block-row__slot--filled">
+      <span class="block-row__slot-label">Work close — 10 min</span>
+    </div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Physical transition — change clothes, move to a different room.</div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">+20m</div>
+    <div class="block-row__slot">
+      <span style="color:var(--ink-600);">______________________________________________</span>
+    </div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">+45m</div>
+    <div class="block-row__slot block-row__slot--filled">
+      <span class="block-row__slot-label">Tomorrow prep — 10 min</span>
+    </div>
+  </div>
+
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Mental transition — write down anything still circling your brain.</div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">+90m</div>
+    <div class="block-row__slot">
+      <span style="color:var(--ink-600);">______________________________________________</span>
+    </div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">+2h</div>
+    <div class="block-row__slot block-row__slot--filled">
+      <span class="block-row__slot-label">Sleep prep — wind-down routine</span>
+    </div>
+  </div>
+
+  <div style="margin-top:14px;padding:12px;background:var(--vanilla-300);border-radius:8px;">
+    <div style="font-family:var(--font-heading);font-size:10pt;font-weight:700;margin-bottom:6px;">Evening notes</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">10</div>
+</div>
+
+<!-- ==================== EVENING BLANK ==================== -->
+<div class="page content">
+  <div class="time-header">
+    <div class="time-header__title">Evening Wind-Down — Blank</div>
+    <div class="time-header__date">Date: ___________</div>
+  </div>
+
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Transition: _____ min</div>
+  </div>
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Transition: _____ min</div>
+  </div>
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+  <div class="transition-block">
+    <div class="transition-block__icon">↺</div>
+    <div class="transition-block__text">Transition: _____ min</div>
+  </div>
+  <div class="block-row">
+    <div class="block-row__time">_____</div>
+    <div class="block-row__slot"><span style="color:var(--ink-600);">______________________________________________</span></div>
+  </div>
+
+  <div style="margin-top:14px;padding:12px;background:var(--vanilla-300);border-radius:8px;">
+    <div style="font-family:var(--font-heading);font-size:10pt;font-weight:700;margin-bottom:6px;">Evening notes</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">11</div>
+</div>
+
+<!-- ==================== SECTION 4 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">04</div>
+  <h2 class="section-divider__title">Visual Timelines</h2>
+  <p class="section-divider__desc">See your day at a glance. For brains that need the big picture.</p>
+</div>
+
+<!-- ==================== VISUAL TIMELINE EXAMPLE ==================== -->
+<div class="page content">
+  <h2>Visual timeline: Example day</h2>
+  <p style="font-size:9.5pt;margin-bottom:10px;">This is what a time-blocked day looks like visually. The height of each segment represents duration. Green = focus. Beige = break. Terracotta = transition.</p>
+
+  <div class="timeline">
+    <div class="timeline__segment timeline__segment--break" style="height:25%;">
+      <div class="timeline__label">Wake</div>
+      <div class="timeline__time">30m</div>
+    </div>
+    <div class="timeline__segment timeline__segment--transition" style="height:10%;">
+      <div class="timeline__label">Trans</div>
+      <div class="timeline__time">10m</div>
+    </div>
+    <div class="timeline__segment timeline__segment--focus" style="height:45%;">
+      <div class="timeline__label">Focus</div>
+      <div class="timeline__time">45m</div>
+    </div>
+    <div class="timeline__segment timeline__segment--transition" style="height:10%;">
+      <div class="timeline__label">Trans</div>
+      <div class="timeline__time">10m</div>
+    </div>
+    <div class="timeline__segment timeline__segment--focus" style="height:55%;">
+      <div class="timeline__label">Focus</div>
+      <div class="timeline__time">60m</div>
+    </div>
+    <div class="timeline__segment timeline__segment--break" style="height:40%;">
+      <div class="timeline__label">Lunch</div>
+      <div class="timeline__time">45m</div>
+    </div>
+    <div class="timeline__segment timeline__segment--focus" style="height:50%;">
+      <div class="timeline__label">Focus</div>
+      <div class="timeline__time">50m</div>
+    </div>
+    <div class="timeline__segment timeline__segment--transition" style="height:10%;">
+      <div class="timeline__label">Trans</div>
+      <div class="timeline__time">10m</div>
+    </div>
+    <div class="timeline__segment timeline__segment--focus" style="height:35%;">
+      <div class="timeline__label">Admin</div>
+      <div class="timeline__time">30m</div>
+    </div>
+    <div class="timeline__segment timeline__segment--break" style="height:30%;">
+      <div class="timeline__label">Wind</div>
+      <div class="timeline__time">25m</div>
+    </div>
+  </div>
+
+  <div class="warm-box">
+    <div class="warm-box__title">How to read this</div>
+    <p style="margin-bottom:4px;"><strong>Tall segments</strong> = longer blocks. You can see at a glance where your heavy focus time is.</p>
+    <p style="margin-bottom:4px;"><strong>Short segments</strong> = transitions and breaks. These protect you from burnout.</p>
+    <p style="margin-bottom:0;"><strong>The pattern</strong> = focus, break, focus, break. Never two focus blocks back-to-back without a transition.</p>
+  </div>
+
+  <div class="page-number">13</div>
+</div>
+
+<!-- ==================== VISUAL TIMELINE BLANK ==================== -->
+<div class="page content">
+  <h2>Visual timeline — Your day</h2>
+  <p style="font-size:9.5pt;margin-bottom:10px;">Draw or label your own timeline. Use colored pens if you have them: green for focus, beige for breaks, terracotta for transitions.</p>
+
+  <div class="timeline" style="height:160px;">
+    <div class="timeline__segment timeline__segment--break" style="height:100%;">
+      <div class="timeline__label" style="font-size:7pt;">________</div>
+    </div>
+    <div class="timeline__segment timeline__segment--transition" style="height:100%;">
+      <div class="timeline__label" style="font-size:7pt;">________</div>
+    </div>
+    <div class="timeline__segment timeline__segment--focus" style="height:100%;">
+      <div class="timeline__label" style="font-size:7pt;">________</div>
+    </div>
+    <div class="timeline__segment timeline__segment--transition" style="height:100%;">
+      <div class="timeline__label" style="font-size:7pt;">________</div>
+    </div>
+    <div class="timeline__segment timeline__segment--focus" style="height:100%;">
+      <div class="timeline__label" style="font-size:7pt;">________</div>
+    </div>
+    <div class="timeline__segment timeline__segment--break" style="height:100%;">
+      <div class="timeline__label" style="font-size:7pt;">________</div>
+    </div>
+    <div class="timeline__segment timeline__segment--focus" style="height:100%;">
+      <div class="timeline__label" style="font-size:7pt;">________</div>
+    </div>
+    <div class="timeline__segment timeline__segment--transition" style="height:100%;">
+      <div class="timeline__label" style="font-size:7pt;">________</div>
+    </div>
+    <div class="timeline__segment timeline__segment--focus" style="height:100%;">
+      <div class="timeline__label" style="font-size:7pt;">________</div>
+    </div>
+    <div class="timeline__segment timeline__segment--break" style="height:100%;">
+      <div class="timeline__label" style="font-size:7pt;">________</div>
+    </div>
+  </div>
+
+  <div style="margin-top:12px;">
+    <div style="display:flex;gap:16px;font-size:9pt;color:var(--ink-600);margin-bottom:8px;">
+      <div style="display:flex;align-items:center;gap:4px;"><div style="width:12px;height:12px;background:var(--green-100);border:1.5px solid var(--green-500);border-radius:3px;"></div> Focus</div>
+      <div style="display:flex;align-items:center;gap:4px;"><div style="width:12px;height:12px;background:var(--vanilla-300);border:1.5px dashed var(--vanilla-400);border-radius:3px;"></div> Break</div>
+      <div style="display:flex;align-items:center;gap:4px;"><div style="width:12px;height:12px;background:var(--terracotta-300);opacity:0.5;border:1.5px solid var(--terracotta-500);border-radius:3px;"></div> Transition</div>
+    </div>
+  </div>
+
+  <div class="worksheet" style="margin-top:10px;">
+    <div class="worksheet__title">Timeline notes</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">14</div>
+</div>
+
+<!-- ==================== SECTION 5 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">05</div>
+  <h2 class="section-divider__title">Transition Scripts</h2>
+  <p class="section-divider__desc">Pre-written transitions for the moments that usually get stuck.</p>
+</div>
+
+<!-- ==================== TRANSITION SCRIPTS ==================== -->
+<div class="page content">
+  <h2>Transition scripts</h2>
+  <p>Transitions are where time blindness hits hardest. You are deep in one thing, and suddenly you are supposed to be doing another thing. These scripts give your brain a bridge.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">How to use a transition script</div>
+    <p style="margin-bottom:0;">Read the script aloud or in your head. Follow the steps in order. Don't skip. The ritual is what makes the transition work.</p>
+  </div>
+
+  <h3>Work → Break</h3>
+  <ol>
+    <li>Set a timer for the break duration.</li>
+    <li>Write down exactly where you stopped. (One sentence.)</li>
+    <li>Stand up and move at least three steps away from your workspace.</li>
+    <li>Do one physical thing: stretch, get water, look out a window.</li>
+    <li>When the timer ends, return and read your stop-sentence.</li>
+  </ol>
+
+  <h3>Break → Work</h3>
+  <ol>
+    <li>Set a timer for the work block.</li>
+    <li>Write the one task for this block at the top of a blank page or sticky note.</li>
+    <li>Close all unrelated tabs, apps, and notifications.</li>
+    <li>Take three slow breaths.</li>
+    <li>Start with the smallest possible first step. (Open the document. Write one sentence.)</li>
+  </ol>
+
+  <h3>Work → Evening</h3>
+  <ol>
+    <li>Set a "work is over" alarm.</li>
+    <li>Write tomorrow's first task on a visible surface.</li>
+    <li>Close all work tabs and documents.</li>
+    <li>Change one physical thing: clothes, room, lighting.</li>
+    <li>Say out loud: "Work is done. Tomorrow is tomorrow."</li>
+  </ol>
+
+  <div class="page-number">16</div>
+</div>
+
+<!-- ==================== CUSTOM TRANSITION ==================== -->
+<div class="page content">
+  <h2>Your custom transition scripts</h2>
+  <p>Use the worksheets below to write your own scripts for the transitions you struggle with most.</p>
+
+  <div class="worksheet">
+    <div class="worksheet__title">My hardest transition</div>
+    <div class="worksheet__prompt">What transition gets you stuck most often?</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">My custom transition script</div>
+    <div class="worksheet__prompt">Write 3–5 steps. Keep them tiny and specific.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">My transition anchor</div>
+    <div class="worksheet__prompt">One physical object or action that signals "transition happening." (A specific song, a walk around the room, a glass of water.)</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">17</div>
+</div>
+
+<!-- ==================== SECTION 6 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">06</div>
+  <h2 class="section-divider__title">Weekly Review</h2>
+  <p class="section-divider__desc">One page to reset, reflect, and plan ahead.</p>
+</div>
+
+<!-- ==================== WEEKLY REVIEW ==================== -->
+<div class="page content">
+  <div class="time-header">
+    <div class="time-header__title">Weekly Review</div>
+    <div class="time-header__date">Week of: ___________</div>
+  </div>
+
+  <h3 style="margin-top:10px;">Energy check</h3>
+  <p style="font-size:9pt;margin-bottom:8px;">Rate each day. Be honest — this is data, not judgment.</p>
+
+  <div class="review-grid">
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Mon</div>
+      <div class="review-grid__face">😐</div>
+      <div class="review-grid__line"></div>
+    </div>
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Tue</div>
+      <div class="review-grid__face">😐</div>
+      <div class="review-grid__line"></div>
+    </div>
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Wed</div>
+      <div class="review-grid__face">😐</div>
+      <div class="review-grid__line"></div>
+    </div>
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Thu</div>
+      <div class="review-grid__face">😐</div>
+      <div class="review-grid__line"></div>
+    </div>
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Fri</div>
+      <div class="review-grid__face">😐</div>
+      <div class="review-grid__line"></div>
+    </div>
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Sat</div>
+      <div class="review-grid__face">😐</div>
+      <div class="review-grid__line"></div>
+    </div>
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Sun</div>
+      <div class="review-grid__face">😐</div>
+      <div class="review-grid__line"></div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:12px;font-size:8pt;color:var(--ink-600);margin-bottom:14px;">
+    <span>😫 Drained</span>
+    <span>😐 Neutral</span>
+    <span>🙂 Good</span>
+    <span>⚡ Peak</span>
+  </div>
+
+  <h3>What worked this week</h3>
+  <div class="worksheet__lines" style="margin-bottom:14px;">
+    <div class="worksheet__line"></div>
+    <div class="worksheet__line"></div>
+    <div class="worksheet__line"></div>
+  </div>
+
+  <h3>What got in the way</h3>
+  <div class="worksheet__lines" style="margin-bottom:14px;">
+    <div class="worksheet__line"></div>
+    <div class="worksheet__line"></div>
+    <div class="worksheet__line"></div>
+  </div>
+
+  <h3>One thing to try next week</h3>
+  <div class="worksheet__lines">
+    <div class="worksheet__line"></div>
+    <div class="worksheet__line"></div>
+  </div>
+
+  <div class="page-number">19</div>
+</div>
+
+<!-- ==================== WEEKLY REVIEW BLANK ==================== -->
+<div class="page content">
+  <div class="time-header">
+    <div class="time-header__title">Weekly Review — Blank</div>
+    <div class="time-header__date">Week of: ___________</div>
+  </div>
+
+  <div class="review-grid">
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Mon</div>
+      <div class="review-grid__line"></div>
+    </div>
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Tue</div>
+      <div class="review-grid__line"></div>
+    </div>
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Wed</div>
+      <div class="review-grid__line"></div>
+    </div>
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Thu</div>
+      <div class="review-grid__line"></div>
+    </div>
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Fri</div>
+      <div class="review-grid__line"></div>
+    </div>
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Sat</div>
+      <div class="review-grid__line"></div>
+    </div>
+    <div class="review-grid__day">
+      <div class="review-grid__day-name">Sun</div>
+      <div class="review-grid__line"></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:14px;">What worked</h3>
+  <div class="worksheet__lines" style="margin-bottom:12px;">
+    <div class="worksheet__line"></div>
+    <div class="worksheet__line"></div>
+  </div>
+
+  <h3>What got in the way</h3>
+  <div class="worksheet__lines" style="margin-bottom:12px;">
+    <div class="worksheet__line"></div>
+    <div class="worksheet__line"></div>
+  </div>
+
+  <h3>Next week's experiment</h3>
+  <div class="worksheet__lines">
+    <div class="worksheet__line"></div>
+    <div class="worksheet__line"></div>
+  </div>
+
+  <div class="page-number">20</div>
+</div>
+
+<!-- ==================== SECTION 7 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">07</div>
+  <h2 class="section-divider__title">Emergency Protocols</h2>
+  <p class="section-divider__desc">For the days when time completely disappears.</p>
+</div>
+
+<!-- ==================== EMERGENCY PROTOCOLS ==================== -->
+<div class="page content">
+  <h2>Emergency protocols</h2>
+  <p>Some days, no amount of planning helps. Time slips away, hyperfocus takes over, or you wake up already behind. These protocols are for those days.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Protocol A: The lost morning</div>
+    <p style="margin-bottom:4px;">You meant to start at 9. It is now 11:30. You feel guilty and paralyzed.</p>
+    <p style="margin-bottom:4px;"><strong>Step 1:</strong> Stop calculating how much time you "wasted." That math is not useful.</p>
+    <p style="margin-bottom:4px;"><strong>Step 2:</strong> Pick ONE thing that matters today. Just one.</p>
+    <p style="margin-bottom:4px;"><strong>Step 3:</strong> Give it 25 minutes. Set a timer. Start anywhere.</p>
+    <p style="margin-bottom:0;"><strong>Step 4:</strong> After 25 minutes, decide: continue, switch, or stop. Any choice is valid.</p>
+  </div>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Protocol B: The hyperfocus spiral</div>
+    <p style="margin-bottom:4px;">You sat down to answer one email. Four hours passed. You missed lunch.</p>
+    <p style="margin-bottom:4px;"><strong>Step 1:</strong> Set a recovery timer for 10 minutes. Stand up. Move.</p>
+    <p style="margin-bottom:4px;"><strong>Step 2:</strong> Eat something. Drink water. Your brain is depleted.</p>
+    <p style="margin-bottom:4px;"><strong>Step 3:</strong> Look at your time blocks. Cancel or shrink anything non-essential.</p>
+    <p style="margin-bottom:0;"><strong>Step 4:</strong> For the rest of the day, use a body double or external timer. Don't trust yourself alone with the task.</p>
+  </div>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Protocol C: The everything-is-urgent day</div>
+    <p style="margin-bottom:4px;">Everything feels due now. You are bouncing between tasks, finishing nothing.</p>
+    <p style="margin-bottom:4px;"><strong>Step 1:</strong> Write every task down. Get it out of your head.</p>
+    <p style="margin-bottom:4px;"><strong>Step 2:</strong> Circle the ONE task with the hardest deadline. That is your first block.</p>
+    <p style="margin-bottom:4px;"><strong>Step 3:</strong> Hide or mute everything else for 25 minutes.</p>
+    <p style="margin-bottom:0;"><strong>Step 4:</strong> Repeat. One task at a time. No multitasking.</p>
+  </div>
+
+  <div class="page-number">22</div>
+</div>
+
+<!-- ==================== CLOSING ==================== -->
+<div class="page content">
+  <h2>You don't need to feel time to manage it</h2>
+
+  <p>Time blindness is real. It is not a character flaw. It is a neurological difference in how your brain processes temporal information.</p>
+
+  <p>These templates exist to externalize time — to make it visible, structured, and manageable without requiring you to "feel" it passing.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">What to remember</div>
+    <p style="margin-bottom:6px;"><strong>Externalize everything.</strong> Timers, visual blocks, and written plans reduce the cognitive load of tracking time.</p>
+    <p style="margin-bottom:6px;"><strong>Transitions are non-negotiable.</strong> Every block needs a bridge. Skipping transitions leads to burnout.</p>
+    <p style="margin-bottom:6px;"><strong>One block at a time.</strong> Don't plan the whole day in your head. Just the next block.</p>
+    <p style="margin-bottom:0;"><strong>Recovery is part of the system.</strong> Bad days don't break the system. The emergency protocols exist because they happen.</p>
+  </div>
+
+  <div class="quote-box">
+    "Time is not something you need to master. It is something you need to partner with — on terms that work for your brain."
+  </div>
+
+  <p style="margin-top:40px;text-align:center;font-size:10pt;color:var(--ink-600);">
+    <strong>DopaFix</strong><br>
+    Practical tools for the things ADHD makes harder.<br><br>
+    © 2026 DopaFix. All rights reserved.<br>
+    This workbook is for personal use only.
+  </p>
+
+  <div class="page-number">24</div>
+</div>
+
+</body>
+</html>

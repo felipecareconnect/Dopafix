@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Newly Diagnosed ADHD Roadmap — DopaFix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-500: #3F7655;
+  --green-700: #244936;
+  --green-100: #DCE9DE;
+  --vanilla-300: #F7F1E3;
+  --vanilla-100: #FBF8F0;
+  --vanilla-400: #E9DDC8;
+  --terracotta-500: #D9785F;
+  --terracotta-300: #E9A18D;
+  --ink-900: #202B25;
+  --ink-600: #687169;
+  --font-heading: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 11pt;
+  line-height: 1.65;
+  color: var(--ink-900);
+  background: #e5e5e5;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm 22mm;
+  margin: 10mm auto;
+  background: var(--vanilla-100);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  position: relative;
+  page-break-after: always;
+  overflow: hidden;
+}
+
+.page:last-child { page-break-after: auto; }
+
+/* Cover */
+.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--green-500);
+  color: var(--vanilla-100);
+}
+
+.cover__logo {
+  font-family: var(--font-heading);
+  font-size: 14pt;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 60px;
+}
+
+.cover__title {
+  font-family: var(--font-heading);
+  font-size: 32pt;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.cover__subtitle {
+  font-size: 13pt;
+  opacity: 0.85;
+  max-width: 340px;
+  line-height: 1.6;
+}
+
+.cover__meta {
+  position: absolute;
+  bottom: 24mm;
+  font-size: 9pt;
+  opacity: 0.6;
+}
+
+/* Section dividers */
+.section-divider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--vanilla-300);
+}
+
+.section-divider__number {
+  font-family: var(--font-heading);
+  font-size: 72pt;
+  font-weight: 800;
+  color: var(--green-100);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.section-divider__title {
+  font-family: var(--font-heading);
+  font-size: 22pt;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin-bottom: 12px;
+}
+
+.section-divider__desc {
+  font-size: 11pt;
+  color: var(--ink-600);
+  max-width: 380px;
+}
+
+/* Content pages */
+.content h2 {
+  font-family: var(--font-heading);
+  font-size: 18pt;
+  font-weight: 700;
+  color: var(--green-700);
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.content h3 {
+  font-family: var(--font-heading);
+  font-size: 13pt;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin-bottom: 10px;
+  margin-top: 24px;
+}
+
+.content h3:first-child { margin-top: 0; }
+
+.content p {
+  margin-bottom: 14px;
+  color: var(--ink-600);
+}
+
+.content p strong {
+  color: var(--ink-900);
+  font-weight: 600;
+}
+
+.content ul, .content ol {
+  margin-bottom: 14px;
+  padding-left: 22px;
+  color: var(--ink-600);
+}
+
+.content li {
+  margin-bottom: 6px;
+}
+
+.content li::marker {
+  color: var(--green-500);
+}
+
+/* Quotes */
+.quote-box {
+  background: var(--green-100);
+  border-left: 4px solid var(--green-500);
+  padding: 16px 20px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--green-700);
+}
+
+/* Warm box */
+.warm-box {
+  background: var(--vanilla-300);
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.warm-box__title {
+  font-family: var(--font-heading);
+  font-size: 11pt;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--ink-900);
+}
+
+/* Worksheets */
+.worksheet {
+  border: 1.5px dashed var(--vanilla-400);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  background: #fff;
+}
+
+.worksheet__title {
+  font-family: var(--font-heading);
+  font-size: 12pt;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--green-700);
+}
+
+.worksheet__prompt {
+  font-size: 10.5pt;
+  color: var(--ink-600);
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.worksheet__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.worksheet__line {
+  border-bottom: 1px solid var(--vanilla-400);
+  height: 24px;
+}
+
+.worksheet__checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.worksheet__checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--green-500);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Grid for friction map */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.grid-item {
+  background: #fff;
+  border: 1.5px solid var(--vanilla-400);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.grid-item__label {
+  font-family: var(--font-heading);
+  font-size: 9pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-600);
+  margin-bottom: 8px;
+}
+
+.grid-item__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.grid-item__line {
+  border-bottom: 1px solid var(--vanilla-400);
+  height: 18px;
+}
+
+/* Rating scale */
+.rating-scale {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.rating-scale__dot {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--vanilla-400);
+  border-radius: 50%;
+}
+
+.rating-scale__label {
+  font-size: 8pt;
+  color: var(--ink-600);
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* Checklist */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.checklist__box {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--green-500);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.checklist__text {
+  font-size: 10.5pt;
+  color: var(--ink-600);
+  line-height: 1.5;
+}
+
+/* Page numbers */
+.page-number {
+  position: absolute;
+  bottom: 14mm;
+  right: 22mm;
+  font-size: 9pt;
+  color: var(--ink-600);
+  opacity: 0.5;
+}
+
+/* Terracotta accent */
+.accent-terracotta { color: var(--terracotta-500); }
+
+/* Table */
+.simple-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 10pt;
+}
+
+.simple-table th {
+  text-align: left;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--ink-900);
+  padding: 8px 10px;
+  border-bottom: 2px solid var(--green-500);
+  background: var(--green-100);
+}
+
+.simple-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--vanilla-400);
+  color: var(--ink-600);
+  vertical-align: top;
+}
+
+/* Print styles */
+@media print {
+  body { background: white; }
+  .page {
+    margin: 0;
+    box-shadow: none;
+    width: 210mm;
+    min-height: 297mm;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+}
+
+/* Screen only */
+@media screen {
+  .page { margin-bottom: 20px; }
+}
+
+/* Small screen */
+@media (max-width: 600px) {
+  .page {
+    width: 100%;
+    padding: 16mm;
+    margin: 0;
+    box-shadow: none;
+    min-height: auto;
+  }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="page cover">
+  <div class="cover__logo">DopaFix</div>
+  <h1 class="cover__title">The Newly Diagnosed<br>ADHD Roadmap</h1>
+  <p class="cover__subtitle">A practical guide for adults who are beginning to understand how executive-function difficulties affect everyday life.</p>
+  <div class="cover__meta">Digital Workbook · 42 Pages · August 2026</div>
+</div>
+
+<!-- ==================== HOW TO USE THIS BOOK ==================== -->
+<div class="page content">
+  <h2>How to use this roadmap</h2>
+  <p>This is not a book to read cover-to-cover in one sitting. It is a reference you return to when you need it.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Suggested approach</div>
+    <p style="margin-bottom:0;"><strong>Read the overview section once.</strong> Get the lay of the land. You don't need to memorize anything.</p>
+  </div>
+
+  <p><strong>Complete the friction map when you have 20 quiet minutes.</strong> There are no right answers. The goal is honesty, not perfection.</p>
+
+  <p><strong>Bookmark the tool selection guide</strong> and return to it when you hit a new stuck point. It is designed to be scanned, not studied.</p>
+
+  <p><strong>Use the next-steps checklist as a gentle anchor,</strong> not a rigid schedule. Check off what you can. Leave the rest. Come back later.</p>
+
+  <div class="quote-box">
+    "The goal is not to fix yourself. The goal is to understand how you work, then build systems that work with you."
+  </div>
+
+  <p><strong>Important:</strong> This workbook is an educational self-reflection tool. It does not diagnose ADHD, provide medical advice, or replace professional support. If you need clinical guidance, please consult a qualified healthcare professional.</p>
+
+  <div class="page-number">2</div>
+</div>
+
+<!-- ==================== SECTION 1 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">01</div>
+  <h2 class="section-divider__title">The Diagnosis Moment</h2>
+  <p class="section-divider__desc">Understanding what your diagnosis actually means — and what it doesn't.</p>
+</div>
+
+<!-- ==================== THE DIAGNOSIS MOMENT ==================== -->
+<div class="page content">
+  <h2>The diagnosis moment</h2>
+
+  <p>For many adults, receiving an ADHD diagnosis is a strange mix of relief and confusion. Relief because suddenly years of unexplained difficulty make sense. Confusion because nobody hands you a manual afterward.</p>
+
+  <p>This section is about sitting with that moment — not rushing past it.</p>
+
+  <h3>What the diagnosis means</h3>
+  <ul>
+    <li>You have a name for a pattern of difficulties you've likely experienced for years.</li>
+    <li>Your brain processes information differently in specific, measurable ways.</li>
+    <li>You are not lazy, broken, or lacking willpower. You are neurodivergent in a world built for neurotypical brains.</li>
+    <li>Treatment and support options exist — medication, therapy, coaching, and practical tools.</li>
+  </ul>
+
+  <h3>What the diagnosis does NOT mean</h3>
+  <ul>
+    <li>It does not define your entire identity.</li>
+    <li>It does not excuse harmful behavior — it explains friction, but you still own your choices.</li>
+    <li>It does not mean you cannot succeed in relationships, careers, or creative pursuits.</li>
+    <li>It does not require you to tell anyone you don't want to tell.</li>
+  </ul>
+
+  <div class="quote-box">
+    A diagnosis is information, not a sentence. It is a starting point, not a destination.
+  </div>
+
+  <div class="page-number">4</div>
+</div>
+
+<!-- ==================== REFLECTION: THE DIAGNOSIS ==================== -->
+<div class="page content">
+  <h2>Reflection: Your diagnosis moment</h2>
+  <p>Take a few minutes to write down what comes up. There are no wrong answers.</p>
+
+  <div class="worksheet">
+    <div class="worksheet__title">How did you feel when you received your diagnosis?</div>
+    <div class="worksheet__prompt">Be honest. Relief, grief, anger, validation, confusion — all of it is normal.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">What suddenly makes sense now?</div>
+    <div class="worksheet__prompt">Think back to school, work, relationships, daily habits.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">What is one thing you want to understand better?</div>
+    <div class="worksheet__prompt">A specific area of difficulty, a treatment option, or a question you keep returning to.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">5</div>
+</div>
+
+<!-- ==================== SECTION 2 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">02</div>
+  <h2 class="section-divider__title">Executive Function Primer</h2>
+  <p class="section-divider__desc">A plain-language overview of the six areas most affected by ADHD.</p>
+</div>
+
+<!-- ==================== EXECUTIVE FUNCTION 1-3 ==================== -->
+<div class="page content">
+  <h2>Executive function: The basics</h2>
+  <p>Executive function is the set of mental skills that help you plan, focus, remember instructions, and juggle multiple tasks. When these skills are impaired, everyday life becomes harder in very specific ways.</p>
+
+  <p>Here are the six areas most commonly affected in adults with ADHD. You do not need to struggle with all of them. Most people have two or three that create the majority of their daily friction.</p>
+
+  <h3>01 — Task Initiation</h3>
+  <p>The ability to start a task, especially when it is not urgent, novel, or externally demanded. Difficulty here feels like knowing exactly what to do and still being unable to begin. It is not procrastination in the traditional sense. It is a neurological gap between intention and action.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">What this can look like</div>
+    <p style="margin-bottom:0;">Sitting down to work and staring at the screen for twenty minutes. Putting off a five-minute task for three days. Waiting until the deadline panic kicks in.</p>
+  </div>
+
+  <h3>02 — Sustained Attention</h3>
+  <p>The ability to stay focused on a task until it is complete. Not starting — <em>staying</em>. Difficulty here means your attention drifts, the environment hijacks it, or your brain seeks stimulation elsewhere mid-task.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">What this can look like</div>
+    <p style="margin-bottom:0;">Reading the same paragraph three times. Opening a browser tab to look something up and losing forty minutes. Forgetting what you were doing in the middle of doing it.</p>
+  </div>
+
+  <h3>03 — Working Memory</h3>
+  <p>The ability to hold information in your mind while using it. Difficulty here means you forget why you walked into a room, lose track of multi-step instructions, or need to write down everything immediately.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">What this can look like</div>
+    <p style="margin-bottom:0;">"I'll remember that" — and you don't. Losing items you "just had." Needing to re-read instructions for every step of a recipe.</p>
+  </div>
+
+  <div class="page-number">7</div>
+</div>
+
+<!-- ==================== EXECUTIVE FUNCTION 4-6 ==================== -->
+<div class="page content">
+  <h2>Executive function (continued)</h2>
+
+  <h3>04 — Time Awareness</h3>
+  <p>The ability to sense time passing, estimate how long tasks take, and manage deadlines. Difficulty here means time feels slippery. You are either unaware of it or hyper-aware in a way that creates anxiety.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">What this can look like</div>
+    <p style="margin-bottom:0;">Chronically running late despite good intentions. Underestimating task duration by half. Being surprised when a deadline arrives. Hyperfocus sessions that consume entire days.</p>
+  </div>
+
+  <h3>05 — Emotional Regulation</h3>
+  <p>The ability to manage and respond to emotional experiences. Difficulty here means emotions arrive fast and hit hard. Frustration tolerance is lower, and recovery from emotional spikes takes longer.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">What this can look like</div>
+    <p style="margin-bottom:0;">Small setbacks feeling catastrophic. Difficulty calming down once triggered. Rejection sensitivity — interpreting neutral feedback as personal criticism.</p>
+  </div>
+
+  <h3>06 — Organization & Planning</h3>
+  <p>The ability to create and maintain systems for managing tasks, objects, and priorities. Difficulty here means the mental load of keeping things in order is heavier than it should be.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">What this can look like</div>
+    <p style="margin-bottom:0;">Piles instead of files. Starting new organizational systems and abandoning them within days. To-do lists that create more anxiety than relief.</p>
+  </div>
+
+  <div class="quote-box">
+    You do not need to be good at all six. You need to understand which two or three create the most friction in <em>your</em> life.
+  </div>
+
+  <div class="page-number">8</div>
+</div>
+
+<!-- ==================== SECTION 3 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">03</div>
+  <h2 class="section-divider__title">Your Personal Friction Map</h2>
+  <p class="section-divider__desc">A guided exercise to identify your specific stuck points.</p>
+</div>
+
+<!-- ==================== FRICTION MAP INSTRUCTIONS ==================== -->
+<div class="page content">
+  <h2>Your friction map</h2>
+  <p>The goal of this exercise is simple: identify the two or three areas where executive-function difficulties create the most daily friction for <em>you</em>.</p>
+
+  <p>This is not about scoring high or low. It is about honesty. The areas where you struggle most are where your tools and systems will have the biggest impact.</p>
+
+  <h3>Instructions</h3>
+  <ol>
+    <li>Read each area description below.</li>
+    <li>Rate how much friction this area creates in your daily life.</li>
+    <li>Write one specific example for each area — a real moment from the last two weeks.</li>
+    <li>At the end, circle your top two or three areas. These are your starting points.</li>
+  </ol>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Rating scale</div>
+    <p style="margin-bottom:4px;"><strong>1 — Minimal</strong>: Occasionally inconvenient, but manageable.</p>
+    <p style="margin-bottom:4px;"><strong>2 — Moderate</strong>: Creates regular friction, but you have some workarounds.</p>
+    <p style="margin-bottom:4px;"><strong>3 — Significant</strong>: A frequent source of stress, missed deadlines, or conflict.</p>
+    <p style="margin-bottom:0;"><strong>4 — Severe</strong>: A daily obstacle that significantly impacts work, relationships, or wellbeing.</p>
+  </div>
+
+  <div class="page-number">10</div>
+</div>
+
+<!-- ==================== FRICTION MAP WORKSHEET ==================== -->
+<div class="page content">
+  <h2>Friction map worksheet</h2>
+
+  <div class="grid-2">
+    <div class="grid-item">
+      <div class="grid-item__label">Task Initiation</div>
+      <div class="worksheet__prompt" style="font-size:9pt;margin-bottom:8px;">Starting tasks, overcoming inertia, beginning without external pressure.</div>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px;">
+        <span style="font-size:9pt;color:var(--ink-600);">Rate:</span>
+        <div class="rating-scale">
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">1</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">2</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">3</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">4</div></div>
+        </div>
+      </div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+
+    <div class="grid-item">
+      <div class="grid-item__label">Sustained Attention</div>
+      <div class="worksheet__prompt" style="font-size:9pt;margin-bottom:8px;">Staying focused, completing tasks, resisting mid-task diversion.</div>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px;">
+        <span style="font-size:9pt;color:var(--ink-600);">Rate:</span>
+        <div class="rating-scale">
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">1</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">2</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">3</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">4</div></div>
+        </div>
+      </div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+
+    <div class="grid-item">
+      <div class="grid-item__label">Working Memory</div>
+      <div class="worksheet__prompt" style="font-size:9pt;margin-bottom:8px;">Remembering instructions, keeping track of objects, holding info in mind.</div>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px;">
+        <span style="font-size:9pt;color:var(--ink-600);">Rate:</span>
+        <div class="rating-scale">
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">1</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">2</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">3</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">4</div></div>
+        </div>
+      </div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+
+    <div class="grid-item">
+      <div class="grid-item__label">Time Awareness</div>
+      <div class="worksheet__prompt" style="font-size:9pt;margin-bottom:8px;">Sensing time, estimating duration, managing deadlines, punctuality.</div>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px;">
+        <span style="font-size:9pt;color:var(--ink-600);">Rate:</span>
+        <div class="rating-scale">
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">1</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">2</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">3</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">4</div></div>
+        </div>
+      </div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+
+    <div class="grid-item">
+      <div class="grid-item__label">Emotional Regulation</div>
+      <div class="worksheet__prompt" style="font-size:9pt;margin-bottom:8px;">Managing frustration, recovering from triggers, handling rejection sensitivity.</div>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px;">
+        <span style="font-size:9pt;color:var(--ink-600);">Rate:</span>
+        <div class="rating-scale">
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">1</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">2</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">3</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">4</div></div>
+        </div>
+      </div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+
+    <div class="grid-item">
+      <div class="grid-item__label">Organization & Planning</div>
+      <div class="worksheet__prompt" style="font-size:9pt;margin-bottom:8px;">Keeping spaces tidy, prioritizing tasks, maintaining systems.</div>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px;">
+        <span style="font-size:9pt;color:var(--ink-600);">Rate:</span>
+        <div class="rating-scale">
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">1</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">2</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">3</div></div>
+          <div><div class="rating-scale__dot"></div><div class="rating-scale__label">4</div></div>
+        </div>
+      </div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="worksheet" style="margin-top:16px;">
+    <div class="worksheet__title">My top 2–3 friction areas</div>
+    <div class="worksheet__prompt">Circle or highlight the areas above with the highest ratings. These are where you will focus first.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">11</div>
+</div>
+
+<!-- ==================== SECTION 4 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">04</div>
+  <h2 class="section-divider__title">Tool Selection Guide</h2>
+  <p class="section-divider__desc">Match your friction points to practical tools, not generic advice.</p>
+</div>
+
+<!-- ==================== TOOL SELECTION ==================== -->
+<div class="page content">
+  <h2>Tool selection guide</h2>
+  <p>Once you know your top friction areas, the next step is finding tools that actually address them. Not productivity hacks. Not inspiration. Tools.</p>
+
+  <p>Use the table below as a starting menu. You do not need everything. Pick one or two tools for your top friction area and try them for two weeks before adding more.</p>
+
+  <table class="simple-table">
+    <thead>
+      <tr>
+        <th style="width:28%;">Friction Area</th>
+        <th style="width:36%;">Tool Type</th>
+        <th style="width:36%;">Why It Helps</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Task Initiation</strong></td>
+        <td>Body-doubling, "first five minutes" timer, task breakdown cards</td>
+        <td>Reduces the activation energy required to start by making the first step tiny and time-bound.</td>
+      </tr>
+      <tr>
+        <td><strong>Sustained Attention</strong></td>
+        <td>Pomodoro with movement breaks, website blockers, single-task mode</td>
+        <td>Creates structure around attention and removes external hijack points.</td>
+      </tr>
+      <tr>
+        <td><strong>Working Memory</strong></td>
+        <td>External capture tools, visual checklists, designated object homes</td>
+        <td>Offloads memory to the environment so your brain doesn't have to hold everything.</td>
+      </tr>
+      <tr>
+        <td><strong>Time Awareness</strong></td>
+        <td>Visual timers, time-blocking templates, transition alarms</td>
+        <td>Makes time visible and concrete instead of abstract and slippery.</td>
+      </tr>
+      <tr>
+        <td><strong>Emotional Regulation</strong></td>
+        <td>Emotion first-aid cards, pause rituals, sensory grounding</td>
+        <td>Creates a buffer between trigger and reaction, giving you choice back.</td>
+      </tr>
+      <tr>
+        <td><strong>Organization</strong></td>
+        <td>One-in-one-out rules, weekly reset, project bins</td>
+        <td>Reduces decision fatigue by creating simple, repeatable systems.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="quote-box">
+    The best tool is the one you will actually use. Start small. One tool, two weeks, honest evaluation.
+  </div>
+
+  <div class="page-number">13</div>
+</div>
+
+<!-- ==================== TOOL SELECTION WORKSHEET ==================== -->
+<div class="page content">
+  <h2>My tool selection</h2>
+  <p>Based on your friction map, choose one tool to experiment with first.</p>
+
+  <div class="worksheet">
+    <div class="worksheet__title">My top friction area</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">The tool I will try</div>
+    <div class="worksheet__prompt">Be specific. "Timer" is vague. "A 10-minute sand timer on my desk for starting tasks" is specific.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">When I will use it</div>
+    <div class="worksheet__prompt">Attach it to an existing habit or a specific time of day.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">What "success" looks like for two weeks</div>
+    <div class="worksheet__prompt">Not perfection. Just slightly less friction than before.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">14</div>
+</div>
+
+<!-- ==================== SECTION 5 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">05</div>
+  <h2 class="section-divider__title">Building Your First System</h2>
+  <p class="section-divider__desc">A starter framework you can adapt, not adopt.</p>
+</div>
+
+<!-- ==================== BUILDING SYSTEM ==================== -->
+<div class="page content">
+  <h2>Building your first system</h2>
+  <p>A system is not a schedule. It is not a set of rules. It is a set of agreements you make with yourself about how you will handle predictable friction points.</p>
+
+  <p>The framework below is designed to be adapted. Take what works. Leave what doesn't. Modify everything.</p>
+
+  <h3>The three-part daily structure</h3>
+
+  <div class="warm-box">
+    <div class="warm-box__title">1. The morning anchor (5–10 minutes)</div>
+    <p style="margin-bottom:8px;">One action that grounds you before the day begins. Not a full routine. One thing.</p>
+    <p style="margin-bottom:0;font-size:10pt;color:var(--ink-600);">Examples: Write one priority. Set one timer. Drink one glass of water while looking out a window.</p>
+  </div>
+
+  <div class="warm-box">
+    <div class="warm-box__title">2. The midday check-in (2 minutes)</div>
+    <p style="margin-bottom:8px;">A single pause to ask: Am I doing what I intended? If not, what is the smallest step back?</p>
+    <p style="margin-bottom:0;font-size:10pt;color:var(--ink-600);">This is not about guilt. It is about gentle recalibration.</p>
+  </div>
+
+  <div class="warm-box">
+    <div class="warm-box__title">3. The evening close (5 minutes)</div>
+    <p style="margin-bottom:8px;">One action that signals the workday is over. This protects against endless task mode.</p>
+    <p style="margin-bottom:0;font-size:10pt;color:var(--ink-600);">Examples: Write tomorrow's first task. Clear your desk. Set a "done for today" alarm.</p>
+  </div>
+
+  <div class="quote-box">
+    A system is only good if it reduces your cognitive load. If maintaining the system becomes another source of stress, simplify it.
+  </div>
+
+  <div class="page-number">16</div>
+</div>
+
+<!-- ==================== SYSTEM WORKSHEET ==================== -->
+<div class="page content">
+  <h2>My first system</h2>
+
+  <div class="worksheet">
+    <div class="worksheet__title">Morning anchor</div>
+    <div class="worksheet__prompt">One thing, 5–10 minutes, every day.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">Midday check-in</div>
+    <div class="worksheet__prompt">One question, 2 minutes.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">Evening close</div>
+    <div class="worksheet__prompt">One action that signals "done for today."</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">My emergency protocol</div>
+    <div class="worksheet__prompt">What will I do when the system falls apart? Because it will. Plan for that.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">17</div>
+</div>
+
+<!-- ==================== SECTION 6 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">06</div>
+  <h2 class="section-divider__title">Next Steps Checklist</h2>
+  <p class="section-divider__desc">Clear, non-overwhelming actions for week one, month one, and beyond.</p>
+</div>
+
+<!-- ==================== WEEK ONE ==================== -->
+<div class="page content">
+  <h2>Week one</h2>
+  <p>Your only job this week is to absorb and observe. Do not try to fix everything at once.</p>
+
+  <div class="checklist">
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Read the Executive Function Primer (Section 02). Don't memorize it. Just notice which areas feel familiar.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Complete the Friction Map (Section 03). Be honest. There are no wrong answers.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Pick ONE tool from the Tool Selection Guide (Section 04) for your top friction area.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Try that tool for three days. Notice what happens. Don't judge the results.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Tell one trusted person about your diagnosis, if you want to. Or don't. Both are valid.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Sleep enough. Eat something before noon. Go outside once a day. The basics matter more than you think.</div>
+    </div>
+  </div>
+
+  <div class="quote-box">
+    Week one is about noticing, not improving. Give yourself permission to simply observe.
+  </div>
+
+  <div class="page-number">19</div>
+</div>
+
+<!-- ==================== MONTH ONE ==================== -->
+<div class="page content">
+  <h2>Month one</h2>
+  <p>By now you have one tool in use and a clearer picture of your friction areas. This month is about building rhythm.</p>
+
+  <div class="checklist">
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Evaluate your first tool. Is it helping? If yes, keep it. If no, try a different tool for the same friction area.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Add ONE tool for your second-highest friction area. Only one.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Build your three-part daily system (Section 05). Start with just the morning anchor. Add the others when the first feels automatic.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Research one support option: medication, therapy, coaching, or peer support. You don't have to commit. Just gather information.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Notice your energy patterns for one week. When are you sharpest? When do you crash? Write it down.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Forgive yourself for the days the system breaks. It will break. The goal is recovery, not perfection.</div>
+    </div>
+  </div>
+
+  <div class="page-number">20</div>
+</div>
+
+<!-- ==================== BEYOND MONTH ONE ==================== -->
+<div class="page content">
+  <h2>Beyond month one</h2>
+  <p>By now you have a small collection of tools that work for you and a daily system that is mostly reliable. The work from here is maintenance, adaptation, and patience.</p>
+
+  <div class="checklist">
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Review your Friction Map every month. Your patterns may shift. New tools may become relevant.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Audit your tools quarterly. What is still working? What has become invisible friction?</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Build a "bad day" kit — a pre-planned set of actions for days when nothing works. This reduces decision fatigue when you are already depleted.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Connect with community if you want to. Online forums, local groups, or peer support can reduce isolation.</div>
+    </div>
+    <div class="checklist__item">
+      <div class="checklist__box"></div>
+      <div class="checklist__text">Revisit your diagnosis story once in a while. How has your understanding changed? What have you learned about yourself?</div>
+    </div>
+  </div>
+
+  <div class="quote-box">
+    This is a long game. Small improvements, sustained over time, create more change than dramatic overhauls that burn out in two weeks.
+  </div>
+
+  <div class="page-number">21</div>
+</div>
+
+<!-- ==================== SECTION 7 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">07</div>
+  <h2 class="section-divider__title">Resource Directory</h2>
+  <p class="section-divider__desc">Where to find community, coaching, and medical support.</p>
+</div>
+
+<!-- ==================== RESOURCES ==================== -->
+<div class="page content">
+  <h2>Resource directory</h2>
+  <p>This is a starting point, not an exhaustive list. Resources vary by country and region. Use this as a launchpad for your own research.</p>
+
+  <h3>Medical & Clinical</h3>
+  <ul>
+    <li><strong>Psychiatrist:</strong> For medication evaluation and management. Look for someone with adult ADHD experience.</li>
+    <li><strong>Psychologist / Therapist:</strong> For CBT, ADHD-informed therapy, and emotional support.</li>
+    <li><strong>General Practitioner:</strong> For referrals, medication monitoring, and overall health coordination.</li>
+  </ul>
+
+  <h3>Coaching & Skills</h3>
+  <ul>
+    <li><strong>ADHD Coach:</strong> For practical strategies, accountability, and system-building. Not a substitute for therapy.</li>
+    <li><strong>Occupational Therapist:</strong> For daily living skills, workplace accommodations, and sensory needs.</li>
+  </ul>
+
+  <h3>Community & Peer Support</h3>
+  <ul>
+    <li><strong>Online forums:</strong> Reddit communities (r/ADHD, r/adhdwomen), Discord servers, and Facebook groups.</li>
+    <li><strong>Local support groups:</strong> Search for ADHD-specific meetups in your city or region.</li>
+    <li><strong>Peer coaching:</strong> Some organizations offer free or low-cost peer support programs.</li>
+  </ul>
+
+  <h3>Books (widely recommended)</h3>
+  <ul>
+    <li><em>Driven to Distraction</em> — Edward Hallowell & John Ratey</li>
+    <li><em>ADHD 2.0</em> — Edward Hallowell & John Ratey</li>
+    <li><em>The ADHD Advantage</em> — Dale Archer</li>
+    <li><em>Your Brain's Not Broken</em> — Tamara Rosier</li>
+  </ul>
+
+  <div class="quote-box">
+    You do not need to engage with every resource. Pick one medical path and one support path. Add more only when the first two feel stable.
+  </div>
+
+  <div class="page-number">23</div>
+</div>
+
+<!-- ==================== CLOSING ==================== -->
+<div class="page content">
+  <h2>You are not starting from zero</h2>
+
+  <p>You have already survived years without knowing why certain things were hard. You developed workarounds, compensations, and creative solutions long before you had a name for what was happening.</p>
+
+  <p>The diagnosis doesn't change who you are. It gives you a lens to understand who you've been all along.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">What to remember</div>
+    <p style="margin-bottom:8px;"><strong>Start small.</strong> One tool. One week. One area of friction.</p>
+    <p style="margin-bottom:8px;"><strong>Be patient.</strong> Systems take time to build. Expect setbacks.</p>
+    <p style="margin-bottom:8px;"><strong>Get support.</strong> You don't have to figure this out alone.</p>
+    <p style="margin-bottom:0;"><strong>Keep going.</strong> Progress is not linear. Forward is forward, no matter how slow.</p>
+  </div>
+
+  <div class="quote-box">
+    "The goal is not to become someone new. The goal is to become someone who understands how they work — and builds a life that works with them."
+  </div>
+
+  <p style="margin-top:40px;text-align:center;font-size:10pt;color:var(--ink-600);">
+    <strong>DopaFix</strong><br>
+    Practical tools for the things ADHD makes harder.<br><br>
+    © 2026 DopaFix. All rights reserved.<br>
+    This workbook is for personal use only.
+  </p>
+
+  <div class="page-number">24</div>
+</div>
+
+</body>
+</html>

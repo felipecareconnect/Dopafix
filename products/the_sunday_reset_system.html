@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sunday Reset System — DopaFix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-500: #3F7655;
+  --green-700: #244936;
+  --green-100: #DCE9DE;
+  --vanilla-300: #F7F1E3;
+  --vanilla-100: #FBF8F0;
+  --vanilla-400: #E9DDC8;
+  --terracotta-500: #D9785F;
+  --terracotta-300: #E9A18D;
+  --ink-900: #202B25;
+  --ink-600: #687169;
+  --font-heading: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+@page { size: A4; margin: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 10.5pt;
+  line-height: 1.55;
+  color: var(--ink-900);
+  background: #e5e5e5;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 20mm;
+  margin: 10mm auto;
+  background: var(--vanilla-100);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  position: relative;
+  page-break-after: always;
+  overflow: hidden;
+}
+
+.page:last-child { page-break-after: auto; }
+
+/* Cover */
+.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--vanilla-300);
+}
+
+.cover__logo {
+  font-family: var(--font-heading);
+  font-size: 13pt;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green-500);
+  margin-bottom: 50px;
+}
+
+.cover__title {
+  font-family: var(--font-heading);
+  font-size: 34pt;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  color: var(--ink-900);
+}
+
+.cover__subtitle {
+  font-size: 12pt;
+  color: var(--ink-600);
+  max-width: 380px;
+  line-height: 1.6;
+}
+
+.cover__visual {
+  margin: 45px 0;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover__day {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--vanilla-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--ink-600);
+}
+
+.cover__day--sun {
+  background: var(--green-500);
+  color: #fff;
+  transform: scale(1.15);
+}
+
+.cover__meta {
+  position: absolute;
+  bottom: 24mm;
+  font-size: 9pt;
+  color: var(--ink-600);
+  opacity: 0.7;
+}
+
+/* Section dividers */
+.section-divider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--terracotta-500);
+  color: var(--vanilla-100);
+}
+
+.section-divider__number {
+  font-family: var(--font-heading);
+  font-size: 64pt;
+  font-weight: 800;
+  opacity: 0.25;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.section-divider__title {
+  font-family: var(--font-heading);
+  font-size: 22pt;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.section-divider__desc {
+  font-size: 11pt;
+  opacity: 0.9;
+  max-width: 380px;
+}
+
+/* Content pages */
+.content h2 {
+  font-family: var(--font-heading);
+  font-size: 17pt;
+  font-weight: 700;
+  color: var(--green-700);
+  margin-bottom: 14px;
+  margin-top: 0;
+}
+
+.content h3 {
+  font-family: var(--font-heading);
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin-bottom: 8px;
+  margin-top: 18px;
+}
+
+.content h3:first-child { margin-top: 0; }
+
+.content p {
+  margin-bottom: 12px;
+  color: var(--ink-600);
+}
+
+.content p strong { color: var(--ink-900); font-weight: 600; }
+
+.content ul, .content ol {
+  margin-bottom: 12px;
+  padding-left: 20px;
+  color: var(--ink-600);
+}
+
+.content li { margin-bottom: 5px; }
+.content li::marker { color: var(--green-500); }
+
+/* Boxes */
+.warm-box {
+  background: var(--vanilla-300);
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin: 14px 0;
+}
+
+.warm-box__title {
+  font-family: var(--font-heading);
+  font-size: 10.5pt;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--ink-900);
+}
+
+.quote-box {
+  background: var(--green-100);
+  border-left: 4px solid var(--green-500);
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--green-700);
+  font-size: 10.5pt;
+}
+
+.terracotta-box {
+  background: #fdf2ee;
+  border-left: 4px solid var(--terracotta-500);
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  color: #8a4a3a;
+  font-size: 10.5pt;
+}
+
+/* Worksheets */
+.worksheet {
+  border: 1.5px dashed var(--vanilla-400);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 14px 0;
+  background: #fff;
+}
+
+.worksheet__title {
+  font-family: var(--font-heading);
+  font-size: 11pt;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--green-700);
+}
+
+.worksheet__prompt {
+  font-size: 9.5pt;
+  color: var(--ink-600);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.worksheet__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.worksheet__line {
+  border-bottom: 1px solid var(--vanilla-400);
+  height: 22px;
+}
+
+/* Checklist */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.checklist__box {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--green-500);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checklist__text {
+  font-size: 10pt;
+  color: var(--ink-600);
+  line-height: 1.45;
+}
+
+/* Reset step cards */
+.step-card {
+  background: #fff;
+  border: 1.5px solid var(--vanilla-400);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+.step-card__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.step-card__number {
+  width: 32px;
+  height: 32px;
+  background: var(--green-500);
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 12pt;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-card__title {
+  font-family: var(--font-heading);
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+
+.step-card__desc {
+  font-size: 10pt;
+  color: var(--ink-600);
+  line-height: 1.5;
+}
+
+/* Grid */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.grid-item {
+  background: #fff;
+  border: 1.5px solid var(--vanilla-400);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.grid-item__label {
+  font-family: var(--font-heading);
+  font-size: 8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-600);
+  margin-bottom: 6px;
+}
+
+.grid-item__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.grid-item__line {
+  border-bottom: 1px solid var(--vanilla-400);
+  height: 16px;
+}
+
+/* Weekly mini-calendar */
+.mini-cal {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.mini-cal__day {
+  background: #fff;
+  border: 1.5px solid var(--vanilla-400);
+  border-radius: 6px;
+  padding: 8px 4px;
+  text-align: center;
+  min-height: 60px;
+}
+
+.mini-cal__name {
+  font-family: var(--font-heading);
+  font-size: 7pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--green-500);
+  margin-bottom: 4px;
+}
+
+.mini-cal__line {
+  border-bottom: 1px solid var(--vanilla-400);
+  height: 12px;
+  margin: 0 2px 4px;
+}
+
+/* Page numbers */
+.page-number {
+  position: absolute;
+  bottom: 12mm;
+  right: 20mm;
+  font-size: 9pt;
+  color: var(--ink-600);
+  opacity: 0.5;
+}
+
+/* Print */
+@media print {
+  body { background: white; }
+  .page {
+    margin: 0;
+    box-shadow: none;
+    width: 210mm;
+    min-height: 297mm;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+}
+
+@media screen {
+  .page { margin-bottom: 18px; }
+}
+
+@media (max-width: 600px) {
+  .page { width: 100%; padding: 14mm; margin: 0; box-shadow: none; min-height: auto; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .mini-cal { grid-template-columns: repeat(4, 1fr); }
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="page cover">
+  <div class="cover__logo">DopaFix</div>
+  <h1 class="cover__title">The Sunday<br>Reset System</h1>
+  <p class="cover__subtitle">A gentle weekly review and reset process that doesn't require perfection. One page, one hour, zero guilt.</p>
+  <div class="cover__visual">
+    <div class="cover__day">M</div>
+    <div class="cover__day">T</div>
+    <div class="cover__day">W</div>
+    <div class="cover__day">T</div>
+    <div class="cover__day">F</div>
+    <div class="cover__day">S</div>
+    <div class="cover__day cover__day--sun">S</div>
+  </div>
+  <div class="cover__meta">Digital Workbook · 22 Pages · August 2026</div>
+</div>
+
+<!-- ==================== HOW TO USE ==================== -->
+<div class="page content">
+  <h2>How to use this system</h2>
+  <p>The Sunday Reset is not about fixing your week. It is about <strong>noticing</strong> your week, <strong>releasing</strong> what is done, and <strong>preparing</strong> for what comes next — with gentleness, not rigidity.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">The promise</div>
+    <p style="margin-bottom:0;">One hour. One worksheet. No perfection required. If you only complete half the sections, that is still a successful reset.</p>
+  </div>
+
+  <h3>When to do it</h3>
+  <p>Sunday works for most people, but any day can be your reset day. The key is consistency, not the calendar. Pick a day and protect it like an appointment.</p>
+
+  <h3>What you need</h3>
+  <ul>
+    <li>This workbook (printed or digital)</li>
+    <li>A pen or stylus</li>
+    <li>One hour where you won't be interrupted</li>
+    <li>Your calendar or planner from the past week</li>
+    <li>Your to-do list or task app</li>
+  </ul>
+
+  <h3>What you don't need</h3>
+  <ul>
+    <li>A perfect week to review</li>
+    <li>A detailed plan for the week ahead</li>
+    <li>Motivation or inspiration</li>
+    <li>Guilt about what didn't get done</li>
+  </ul>
+
+  <div class="quote-box">
+    "The Sunday Reset is not a performance review. It is a compassionate checkpoint. You are gathering data about yourself, not grading yourself."
+  </div>
+
+  <div class="page-number">2</div>
+</div>
+
+<!-- ==================== SECTION 1 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">01</div>
+  <h2 class="section-divider__title">The Philosophy</h2>
+  <p class="section-divider__desc">Why a weekly reset works better than a daily overhaul.</p>
+</div>
+
+<!-- ==================== PHILOSOPHY ==================== -->
+<div class="page content">
+  <h2>The philosophy of the reset</h2>
+
+  <p>Most productivity systems fail because they demand daily perfection. Miss one day and the whole system collapses. The Sunday Reset avoids this by operating on a weekly rhythm — a forgiving loop that gives you seven chances to get back on track.</p>
+
+  <h3>Why Sunday (or any single day)</h3>
+  <p>Doing a reset every day is exhausting. Doing one once a month is too infrequent to catch patterns. Once a week hits the sweet spot: frequent enough to stay oriented, spaced enough to not feel like another daily chore.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">The four movements</div>
+    <p style="margin-bottom:4px;"><strong>01 Review</strong> — Look back at the week without judgment.</p>
+    <p style="margin-bottom:4px;"><strong>02 Release</strong> — Let go of what is finished, failed, or no longer relevant.</p>
+    <p style="margin-bottom:4px;"><strong>03 Refill</strong> — Identify what you need for the week ahead.</p>
+    <p style="margin-bottom:0;"><strong>04 Preview</strong> — Sketch a loose structure for the coming week.</p>
+  </div>
+
+  <h3>The non-negotiables</h3>
+  <ul>
+    <li><strong>No guilt.</strong> The reset is a mirror, not a judge.</li>
+    <li><strong>No perfection.</strong> Half-completed resets are valid resets.</li>
+    <li><strong>No overplanning.</strong> The preview is a sketch, not a contract.</li>
+    <li><strong>No comparison.</strong> Your reset looks like your life, not someone else's Instagram.</li>
+  </ul>
+
+  <div class="terracotta-box">
+    <strong>Important:</strong> If you are in a depressive episode, recovering from burnout, or dealing with a crisis, skip the reset. Come back when you have capacity. The system will wait for you.
+  </div>
+
+  <div class="page-number">4</div>
+</div>
+
+<!-- ==================== SECTION 2 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">02</div>
+  <h2 class="section-divider__title">01 — Review</h2>
+  <p class="section-divider__desc">Look back at the week without judgment.</p>
+</div>
+
+<!-- ==================== REVIEW GUIDE ==================== -->
+<div class="page content">
+  <h2>Step 01: Review</h2>
+  <p>The goal of the review is simple: gather data about your week. Not to evaluate. Not to score. Just to notice.</p>
+
+  <h3>How to review</h3>
+  <ol>
+    <li>Look at your calendar, planner, or task list from the past seven days.</li>
+    <li>For each day, ask: <em>What happened? What felt easy? What felt hard?</em></li>
+    <li>Notice patterns, not isolated incidents. One bad day is weather. Three bad days is climate.</li>
+    <li>Write down what you notice. Even one word per day is enough.</li>
+  </ol>
+
+  <div class="quote-box">
+    You are not looking for failures. You are looking for friction points — the places where your system rubbed against reality.
+  </div>
+
+  <h3>Review prompts</h3>
+  <ul>
+    <li>What was the best moment of this week?</li>
+    <li>When did I feel most in flow?</li>
+    <li>When did I feel most stuck?</li>
+    <li>What did I avoid? Why?</li>
+    <li>What took more energy than it should have?</li>
+    <li>What gave me energy back?</li>
+  </ul>
+
+  <div class="page-number">6</div>
+</div>
+
+<!-- ==================== REVIEW WORKSHEET ==================== -->
+<div class="page content">
+  <h2>Review worksheet</h2>
+  <p>Week of: ______________________</p>
+
+  <div class="mini-cal">
+    <div class="mini-cal__day">
+      <div class="mini-cal__name">Mon</div>
+      <div class="mini-cal__line"></div>
+      <div class="mini-cal__line"></div>
+    </div>
+    <div class="mini-cal__day">
+      <div class="mini-cal__name">Tue</div>
+      <div class="mini-cal__line"></div>
+      <div class="mini-cal__line"></div>
+    </div>
+    <div class="mini-cal__day">
+      <div class="mini-cal__name">Wed</div>
+      <div class="mini-cal__line"></div>
+      <div class="mini-cal__line"></div>
+    </div>
+    <div class="mini-cal__day">
+      <div class="mini-cal__name">Thu</div>
+      <div class="mini-cal__line"></div>
+      <div class="mini-cal__line"></div>
+    </div>
+    <div class="mini-cal__day">
+      <div class="mini-cal__name">Fri</div>
+      <div class="mini-cal__line"></div>
+      <div class="mini-cal__line"></div>
+    </div>
+    <div class="mini-cal__day">
+      <div class="mini-cal__name">Sat</div>
+      <div class="mini-cal__line"></div>
+      <div class="mini-cal__line"></div>
+    </div>
+    <div class="mini-cal__day">
+      <div class="mini-cal__name">Sun</div>
+      <div class="mini-cal__line"></div>
+      <div class="mini-cal__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet" style="margin-top:10px;">
+    <div class="worksheet__title">One thing that worked</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">One thing that got in the way</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">One pattern I noticed</div>
+    <div class="worksheet__prompt">A recurring friction point, energy dip, or successful strategy.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">7</div>
+</div>
+
+<!-- ==================== SECTION 3 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">03</div>
+  <h2 class="section-divider__title">02 — Release</h2>
+  <p class="section-divider__desc">Let go of what is finished, failed, or no longer relevant.</p>
+</div>
+
+<!-- ==================== RELEASE GUIDE ==================== -->
+<div class="page content">
+  <h2>Step 02: Release</h2>
+  <p>The release step is about clearing mental and physical space. Unfinished tasks, abandoned projects, and lingering guilt all take up cognitive real estate. This step gives you permission to let them go.</p>
+
+  <h3>The three release categories</h3>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number">A</div>
+      <div class="step-card__title">Finished & Forgotten</div>
+    </div>
+    <div class="step-card__desc">Tasks you completed but never acknowledged. Write them down. Give yourself credit. Cross them off for real.</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number">B</div>
+      <div class="step-card__title">Failed & Learned</div>
+    </div>
+    <div class="step-card__desc">Things that didn't work out. Not failures — data. Write one thing you learned from each. Then let them go.</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number">C</div>
+      <div class="step-card__title">Stale & Irrelevant</div>
+    </div>
+    <div class="step-card__desc">Tasks, goals, or commitments that no longer matter. If you have been carrying them for weeks without action, they are probably not real priorities.</div>
+  </div>
+
+  <div class="quote-box">
+    "You do not need to finish everything you started. You need to finish the things that still matter. Everything else is clutter."
+  </div>
+
+  <div class="page-number">9</div>
+</div>
+
+<!-- ==================== RELEASE WORKSHEET ==================== -->
+<div class="page content">
+  <h2>Release worksheet</h2>
+
+  <div class="worksheet">
+    <div class="worksheet__title">A — What I finished and never acknowledged</div>
+    <div class="worksheet__prompt">Give yourself credit. List at least three.</div>
+    <div class="checklist">
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">B — What didn't work and what I learned</div>
+    <div class="worksheet__prompt">One lesson per item. No self-criticism.</div>
+    <div class="grid-2">
+      <div class="grid-item">
+        <div class="grid-item__label">What happened</div>
+        <div class="grid-item__lines"><div class="grid-item__line"></div><div class="grid-item__line"></div></div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item__label">What I learned</div>
+        <div class="grid-item__lines"><div class="grid-item__line"></div><div class="grid-item__line"></div></div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item__label">What happened</div>
+        <div class="grid-item__lines"><div class="grid-item__line"></div><div class="grid-item__line"></div></div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item__label">What I learned</div>
+        <div class="grid-item__lines"><div class="grid-item__line"></div><div class="grid-item__line"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">C — What I am releasing</div>
+    <div class="worksheet__prompt">Stale tasks, abandoned goals, or obligations that no longer fit. Cross them out with satisfaction.</div>
+    <div class="checklist">
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+    </div>
+  </div>
+
+  <div class="page-number">10</div>
+</div>
+
+<!-- ==================== SECTION 4 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">04</div>
+  <h2 class="section-divider__title">03 — Refill</h2>
+  <p class="section-divider__desc">Identify what you need for the week ahead.</p>
+</div>
+
+<!-- ==================== REFILL GUIDE ==================== -->
+<div class="page content">
+  <h2>Step 03: Refill</h2>
+  <p>Before you plan what to <em>do</em>, plan what you <em>need</em>. Energy, supplies, support, boundaries — these are the inputs that make output possible.</p>
+
+  <h3>The four refill buckets</h3>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Physical</div>
+    <p style="margin-bottom:0;">Sleep, food, movement, medication, medical appointments. The foundation everything else sits on.</p>
+  </div>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Mental</div>
+    <p style="margin-bottom:0;">Information, clarity, focus time, reduced decision load. What do you need to think clearly this week?</p>
+  </div>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Emotional</div>
+    <p style="margin-bottom:0;">Connection, solitude, validation, safety. Who do you need around you? Who do you need distance from?</p>
+  </div>
+
+  <div class="warm-box">
+    <div class="warm-box__title">Environmental</div>
+    <p style="margin-bottom:0;">Clean space, working tools, stocked supplies, quiet zones. What does your environment need to support you?</p>
+  </div>
+
+  <div class="quote-box">
+    "You cannot pour from an empty cup" is a cliché because it is true. The refill step exists because most of us skip it entirely.
+  </div>
+
+  <div class="page-number">12</div>
+</div>
+
+<!-- ==================== REFILL WORKSHEET ==================== -->
+<div class="page content">
+  <h2>Refill worksheet</h2>
+  <p>Week of: ______________________</p>
+
+  <div class="grid-2">
+    <div class="grid-item">
+      <div class="grid-item__label">Physical needs</div>
+      <div class="worksheet__prompt" style="font-size:8pt;margin-bottom:6px;">Sleep, food, movement, meds, appointments</div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+    <div class="grid-item">
+      <div class="grid-item__label">Mental needs</div>
+      <div class="worksheet__prompt" style="font-size:8pt;margin-bottom:6px;">Focus time, clarity, reduced decisions, info</div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+    <div class="grid-item">
+      <div class="grid-item__label">Emotional needs</div>
+      <div class="worksheet__prompt" style="font-size:8pt;margin-bottom:6px;">Connection, solitude, support, boundaries</div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+    <div class="grid-item">
+      <div class="grid-item__label">Environmental needs</div>
+      <div class="worksheet__prompt" style="font-size:8pt;margin-bottom:6px;">Clean space, tools, supplies, quiet zones</div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="worksheet" style="margin-top:10px;">
+    <div class="worksheet__title">One thing I will protect this week</div>
+    <div class="worksheet__prompt">A boundary, a habit, or a non-negotiable need. Write it large.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">One thing I will ask for</div>
+    <div class="worksheet__prompt">Support, accommodation, or help. You don't have to do everything alone.</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">13</div>
+</div>
+
+<!-- ==================== SECTION 5 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">05</div>
+  <h2 class="section-divider__title">04 — Preview</h2>
+  <p class="section-divider__desc">Sketch a loose structure for the coming week.</p>
+</div>
+
+<!-- ==================== PREVIEW GUIDE ==================== -->
+<div class="page content">
+  <h2>Step 04: Preview</h2>
+  <p>The preview is not a detailed schedule. It is a sketch — a loose idea of where your energy and attention will go. Think of it as drawing boundaries around your time, not filling every hour.</p>
+
+  <h3>The preview rules</h3>
+  <ul>
+    <li><strong>Three priorities maximum.</strong> Not ten. Three. Everything else is bonus.</li>
+    <li><strong>Leave white space.</strong> Unscheduled time is not wasted time. It is buffer time.</li>
+    <li><strong>Attach tasks to days loosely.</strong> "Tuesday or Wednesday" is better than "Tuesday at 2pm."</li>
+    <li><strong>Include one enjoyable thing per day.</strong> Even if it is tiny. Even if it is just "good coffee."</li>
+  </ul>
+
+  <div class="warm-box">
+    <div class="warm-box__title">The "must / should / could" framework</div>
+    <p style="margin-bottom:4px;"><strong>Must</strong> — Has a hard deadline or real consequence if missed. Non-negotiable.</p>
+    <p style="margin-bottom:4px;"><strong>Should</strong> — Important but flexible. Can be moved if needed.</p>
+    <p style="margin-bottom:0;"><strong>Could</strong> — Nice to have. No pressure. If it happens, great. If not, also great.</p>
+  </div>
+
+  <div class="quote-box">
+    "A good preview gives you direction without trapping you. It is a compass, not a cage."
+  </div>
+
+  <div class="page-number">15</div>
+</div>
+
+<!-- ==================== PREVIEW WORKSHEET ==================== -->
+<div class="page content">
+  <h2>Preview worksheet</h2>
+  <p>Week of: ______________________</p>
+
+  <div class="worksheet">
+    <div class="worksheet__title">My three priorities</div>
+    <div class="worksheet__prompt">If everything else fails, these three things still need to happen.</div>
+    <div class="checklist">
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+      <div class="checklist__item"><div class="checklist__box"></div><div class="checklist__text">__________________________________________</div></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="grid-item">
+      <div class="grid-item__label">Must do</div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+    <div class="grid-item">
+      <div class="grid-item__label">Should do</div>
+      <div class="grid-item__lines">
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="worksheet" style="margin-top:10px;">
+    <div class="worksheet__title">Could do (if energy allows)</div>
+    <div class="worksheet__lines">
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+      <div class="worksheet__line"></div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="worksheet__title">One enjoyable thing per day</div>
+    <div class="worksheet__prompt">Tiny is fine. "Good coffee" counts.</div>
+    <div class="grid-2">
+      <div class="grid-item">
+        <div class="grid-item__label">Mon</div>
+        <div class="grid-item__line"></div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item__label">Tue</div>
+        <div class="grid-item__line"></div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item__label">Wed</div>
+        <div class="grid-item__line"></div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item__label">Thu</div>
+        <div class="grid-item__line"></div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item__label">Fri</div>
+        <div class="grid-item__line"></div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item__label">Sat</div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-number">16</div>
+</div>
+
+<!-- ==================== SECTION 6 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">06</div>
+  <h2 class="section-divider__title">The Complete Reset</h2>
+  <p class="section-divider__desc">All four steps on one page. For when you want the full process.</p>
+</div>
+
+<!-- ==================== COMPLETE RESET ==================== -->
+<div class="page content">
+  <div class="time-header" style="border-color:var(--terracotta-500);">
+    <div class="time-header__title">The Complete Sunday Reset</div>
+    <div class="time-header__date">Week of: ___________</div>
+  </div>
+
+  <div class="step-card" style="margin-top:12px;">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--terracotta-500);">1</div>
+      <div class="step-card__title">Review</div>
+    </div>
+    <div class="grid-2">
+      <div class="grid-item" style="border:none;background:transparent;padding:0;">
+        <div class="grid-item__label">Best moment</div>
+        <div class="grid-item__line"></div>
+      </div>
+      <div class="grid-item" style="border:none;background:transparent;padding:0;">
+        <div class="grid-item__label">Hardest moment</div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+    <div class="grid-item" style="border:none;background:transparent;padding:0;margin-top:6px;">
+      <div class="grid-item__label">One pattern I noticed</div>
+      <div class="grid-item__line"></div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--terracotta-500);">2</div>
+      <div class="step-card__title">Release</div>
+    </div>
+    <div class="grid-item" style="border:none;background:transparent;padding:0;">
+      <div class="grid-item__label">What I am letting go of</div>
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--terracotta-500);">3</div>
+      <div class="step-card__title">Refill</div>
+    </div>
+    <div class="grid-item" style="border:none;background:transparent;padding:0;">
+      <div class="grid-item__label">What I need this week</div>
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--terracotta-500);">4</div>
+      <div class="step-card__title">Preview</div>
+    </div>
+    <div class="grid-2">
+      <div class="grid-item" style="border:none;background:transparent;padding:0;">
+        <div class="grid-item__label">Priority 1</div>
+        <div class="grid-item__line"></div>
+      </div>
+      <div class="grid-item" style="border:none;background:transparent;padding:0;">
+        <div class="grid-item__label">Priority 2</div>
+        <div class="grid-item__line"></div>
+      </div>
+    </div>
+    <div class="grid-item" style="border:none;background:transparent;padding:0;margin-top:6px;">
+      <div class="grid-item__label">Priority 3</div>
+      <div class="grid-item__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">18</div>
+</div>
+
+<!-- ==================== COMPLETE RESET BLANK ==================== -->
+<div class="page content">
+  <div class="time-header" style="border-color:var(--terracotta-500);">
+    <div class="time-header__title">The Complete Sunday Reset — Blank</div>
+    <div class="time-header__date">Week of: ___________</div>
+  </div>
+
+  <div class="step-card" style="margin-top:12px;">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--terracotta-500);">1</div>
+      <div class="step-card__title">Review</div>
+    </div>
+    <div class="grid-item" style="border:none;background:transparent;padding:0;">
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--terracotta-500);">2</div>
+      <div class="step-card__title">Release</div>
+    </div>
+    <div class="grid-item" style="border:none;background:transparent;padding:0;">
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--terracotta-500);">3</div>
+      <div class="step-card__title">Refill</div>
+    </div>
+    <div class="grid-item" style="border:none;background:transparent;padding:0;">
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--terracotta-500);">4</div>
+      <div class="step-card__title">Preview</div>
+    </div>
+    <div class="grid-item" style="border:none;background:transparent;padding:0;">
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+      <div class="grid-item__line"></div>
+    </div>
+  </div>
+
+  <div class="page-number">19</div>
+</div>
+
+<!-- ==================== SECTION 7 DIVIDER ==================== -->
+<div class="page section-divider">
+  <div class="section-divider__number">07</div>
+  <h2 class="section-divider__title">When You Don't Feel Like Resetting</h2>
+  <p class="section-divider__desc">Protocols for low-energy, high-stress, or "I can't even" weeks.</p>
+</div>
+
+<!-- ==================== LOW ENERGY PROTOCOLS ==================== -->
+<div class="page content">
+  <h2>Low-energy protocols</h2>
+  <p>Some weeks, the full reset feels impossible. That is normal. These scaled-down versions exist for exactly those weeks.</p>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--green-500);">5m</div>
+      <div class="step-card__title">The Micro Reset</div>
+    </div>
+    <div class="step-card__desc">
+      <p style="margin-bottom:6px;">For when you have five minutes and zero motivation.</p>
+      <ol style="padding-left:18px;margin-bottom:0;">
+        <li>Write down one thing that went okay this week.</li>
+        <li>Write down one thing you are releasing.</li>
+        <li>Write down one thing you need next week.</li>
+        <li>Done.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--green-500);">15m</div>
+      <div class="step-card__title">The Half Reset</div>
+    </div>
+    <div class="step-card__desc">
+      <p style="margin-bottom:6px;">For when you have a little energy but not enough for the full process.</p>
+      <ol style="padding-left:18px;margin-bottom:0;">
+        <li>Do the Review worksheet. Skip the detailed daily notes. Just one word per day.</li>
+        <li>Do the Release worksheet. Only category C (stale & irrelevant).</li>
+        <li>Write your three priorities for next week.</li>
+        <li>Skip Refill and detailed Preview. Come back to them when you have more capacity.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-card__header">
+      <div class="step-card__number" style="background:var(--green-500);">Skip</div>
+      <div class="step-card__title">The Skip Week</div>
+    </div>
+    <div class="step-card__desc">
+      <p style="margin-bottom:6px;">For when you are burned out, grieving, in crisis, or simply done.</p>
+      <ol style="padding-left:18px;margin-bottom:0;">
+        <li>Close this workbook.</li>
+        <li>Do something restorative. Sleep. Eat. Be with people who care about you.</li>
+        <li>Come back next week. Or the week after. The system will wait.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="quote-box">
+    "Skipping a reset is not a failure. It is a valid response to your current capacity. The reset is a tool, not a tyrant."
+  </div>
+
+  <div class="page-number">21</div>
+</div>
+
+<!-- ==================== CLOSING ==================== -->
+<div class="page content">
+  <h2>Reset, don't rebuild</h2>
+
+  <p>The Sunday Reset is not about fixing your life every seven days. It is about maintaining gentle contact with your own patterns — noticing what works, releasing what doesn't, and heading into the new week with slightly more clarity than you had before.</p>
+
+  <p>Some resets will feel transformative. Others will feel like going through the motions. Both are valid. The value is in the repetition, not in any single session.</p>
+
+  <div class="warm-box">
+    <div class="warm-box__title">What to remember</div>
+    <p style="margin-bottom:6px;"><strong>One hour, not one day.</strong> The reset is bounded. It does not consume your Sunday.</p>
+    <p style="margin-bottom:6px;"><strong>Gentle, not rigorous.</strong> If it feels like a chore, you are doing it wrong. Simplify until it feels supportive.</p>
+    <p style="margin-bottom:6px;"><strong>Data, not judgment.</strong> Every week teaches you something about how you work. Collect the data. Adjust the system.</p>
+    <p style="margin-bottom:0;"><strong>The system waits for you.</strong> Miss a week? Two weeks? A month? The reset is still here when you are ready.</p>
+  </div>
+
+  <div class="quote-box">
+    "You don't need a perfect week to have a good reset. You just need an honest look at the week you had, and a gentle plan for the week ahead."
+  </div>
+
+  <p style="margin-top:40px;text-align:center;font-size:10pt;color:var(--ink-600);">
+    <strong>DopaFix</strong><br>
+    Practical tools for the things ADHD makes harder.<br><br>
+    © 2026 DopaFix. All rights reserved.<br>
+    This workbook is for personal use only.
+  </p>
+
+  <div class="page-number">22</div>
+</div>
+
+</body>
+</html>
