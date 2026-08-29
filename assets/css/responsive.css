@@ -1,0 +1,151 @@
+/* ==========================================================================
+   DopaFix — Responsive Adaptations & Fine-Tuning
+   Architecture: Responsive Layer
+   Goal: Custom break-point adaptations across 320px+, 480px+, 768px+, 1024px+, 1440px+
+   ========================================================================== */
+
+/* ------------------------------------------------------------------------
+   1. SMALL MOBILE (320px+) - Tight Screen Optimization
+   ------------------------------------------------------------------------ */
+@media (max-width: 479px) {
+  .hero-visual {
+    padding: var(--space-xs);
+  }
+
+  .hero-sticky-note {
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 100%;
+    transform: none;
+    margin-top: var(--space-md);
+  }
+
+  .hero-progress-card {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    min-width: 100%;
+    margin-top: var(--space-sm);
+  }
+
+  .assessment-banner {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .footer-links-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   2. LARGE MOBILE / PHABLETS (480px+)
+   ------------------------------------------------------------------------ */
+@media (min-width: 480px) and (max-width: 767px) {
+  .hero-sticky-note {
+    width: 160px;
+    right: -10px;
+    top: -15px;
+  }
+  
+  .hero-progress-card {
+    min-width: 180px;
+    bottom: -10px;
+    left: -10px;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   3. TABLETS & SMALL LAPTOPS (768px+)
+   ------------------------------------------------------------------------ */
+@media (min-width: 768px) {
+  .nav-container {
+    height: 84px;
+  }
+
+  .hero-section {
+    padding-top: var(--space-3xl);
+    padding-bottom: var(--space-4xl);
+  }
+
+  .hero-sticky-note {
+    top: -15px;
+    right: -15px;
+    width: 200px;
+  }
+
+  .hero-progress-card {
+    bottom: -20px;
+    left: -20px;
+    padding: var(--space-md) var(--space-xl);
+  }
+
+  .product-card {
+    padding: var(--space-2xl);
+  }
+}
+
+/* ------------------------------------------------------------------------
+   4. DESKTOPS & LARGE SCREENS (1024px+)
+   ------------------------------------------------------------------------ */
+@media (min-width: 1024px) {
+  .hero-headline {
+    font-size: 3.75rem;
+  }
+
+  .hero-lead {
+    font-size: var(--font-size-xl);
+  }
+
+  .visual-task-card {
+    padding: var(--space-lg);
+  }
+
+  .footer-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   5. EXTRA LARGE / ULTRA-WIDE SCREENS (1440px+)
+   ------------------------------------------------------------------------ */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1360px;
+  }
+
+  .hero-section {
+    padding-top: var(--space-4xl);
+    padding-bottom: 7rem;
+  }
+
+  .hero-headline {
+    font-size: 4.25rem;
+  }
+
+  .hero-visual {
+    max-width: 620px;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   6. PRINT & HIGH-CONTRAST PREFERENCES
+   ------------------------------------------------------------------------ */
+@media print {
+  .site-header,
+  .mobile-nav-drawer,
+  .hero-actions,
+  .assessment-banner,
+  .site-footer {
+    display: none !important;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+}

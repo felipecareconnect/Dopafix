@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DopaFix — Practical Tools for the Things ADHD Makes Harder</title>
+  <meta name="description" content="DopaFix creates practical digital tools, workbooks, and systems for adults experiencing ADHD, task initiation, procrastination, time blindness, and executive functioning challenges.">
+  
+  <!-- CSS Architecture Layer Imports -->
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body class="bg-vanilla-light">
+
+  <!-- ==========================================================================
+     SITE HEADER & NAVIGATION
+     ========================================================================== -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo" aria-label="DopaFix Homepage">
+        DopaFix<span class="logo-dot"></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="assessment.html" class="nav-link">Assessment</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="about.html" class="nav-link">About</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="assessment.html" class="btn btn-primary btn-sm">Take Free Assessment</a>
+      </div>
+
+      <button type="button" class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="shop.html" class="mobile-nav-link">Shop</a>
+      <a href="assessment.html" class="mobile-nav-link">Assessment</a>
+      <a href="#how-it-works" class="mobile-nav-link">How It Works</a>
+      <a href="about.html" class="mobile-nav-link">About</a>
+    </div>
+    <div style="margin-top: var(--space-xl);">
+      <a href="assessment.html" class="btn btn-primary btn-full">Take Free Assessment</a>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+     HERO SECTION
+     ========================================================================== -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <span class="eyebrow">Tools for the way your brain works</span>
+          <h1 class="hero-headline">You know what to do.<br>Starting is the hard part.</h1>
+          <p class="hero-lead">
+            DopaFix creates practical digital tools for attention, organization, procrastination, time, transitions and everyday executive functioning.
+          </p>
+          <div class="hero-actions">
+            <a href="assessment.html" class="btn btn-primary btn-lg">Take the Free Assessment</a>
+            <a href="shop.html" class="btn btn-outline btn-lg">Explore ADHD Tools</a>
+          </div>
+        </div>
+
+        <!-- Pure HTML/CSS Digital Visual Composition -->
+        <div class="hero-visual">
+          <div class="hero-device-tablet">
+            <div class="hero-device-screen">
+              <div class="visual-header">
+                <span class="visual-tag">SYSTEM OVERVIEW</span>
+                <div class="visual-dots">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+
+              <div class="visual-task-card">
+                <div class="task-checkbox">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <div class="task-info">
+                  <span class="task-title">Deconstruct Task Friction</span>
+                  <span class="task-meta">Task Initiation Protocol • Step 01</span>
+                </div>
+              </div>
+
+              <div class="visual-task-card" style="opacity: 0.8;">
+                <div class="task-checkbox" style="border-color: var(--muted); background: transparent;"></div>
+                <div class="task-info">
+                  <span class="task-title">Set 15-Min Buffer Window</span>
+                  <span class="task-meta">Transition Externalizer</span>
+                </div>
+              </div>
+
+              <div class="visual-task-card" style="opacity: 0.6;">
+                <div class="task-checkbox" style="border-color: var(--muted); background: transparent;"></div>
+                <div class="task-info">
+                  <span class="task-title">Micro-Step First Action</span>
+                  <span class="task-meta">Execution Blueprint</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Tactile Elements -->
+          <div class="hero-sticky-note">
+            <p class="sticky-text">Rule #1: Reduce starting friction down to 2 minutes.</p>
+          </div>
+
+          <div class="hero-progress-card">
+            <span class="hero-progress-title">Executive Friction</span>
+            <span class="hero-progress-value">-68% Overhead</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     PROBLEM RECOGNITION SECTION
+     ========================================================================== -->
+  <section class="section bg-vanilla">
+    <div class="container">
+      <div class="text-center" style="max-width: 640px; margin: 0 auto var(--space-2xl);">
+        <span class="eyebrow">Friction Identification</span>
+        <h2>What are you struggling with?</h2>
+        <p class="lead">Select the challenge that feels most persistent today.</p>
+      </div>
+
+      <div class="struggle-grid">
+        <article class="struggle-card">
+          <div>
+            <span class="struggle-tag">Task initiation</span>
+            <h3 class="struggle-quote">"I can't start."</h3>
+            <p class="text-muted" style="margin-top: var(--space-xs);">Paralyzed by large tasks even when you genuinely want to do them.</p>
+          </div>
+        </article>
+
+        <article class="struggle-card">
+          <div>
+            <span class="struggle-tag">Time blindness</span>
+            <h3 class="struggle-quote">"I lose track of time."</h3>
+            <p class="text-muted" style="margin-top: var(--space-xs);">Minutes evaporate, deadlines surprise you, and estimating duration feels impossible.</p>
+          </div>
+        </article>
+
+        <article class="struggle-card">
+          <div>
+            <span class="struggle-tag">Overwhelm</span>
+            <h3 class="struggle-quote">"Everything feels like too much."</h3>
+            <p class="text-muted" style="margin-top: var(--space-xs);">Cognitive load spikes, leading to shutdown before any action begins.</p>
+          </div>
+        </article>
+
+        <article class="struggle-card">
+          <div>
+            <span class="struggle-tag">Digital distraction</span>
+            <h3 class="struggle-quote">"My phone takes over."</h3>
+            <p class="text-muted" style="margin-top: var(--space-xs);">Unintentional hyperfocus loops on notifications, feeds, and open tabs.</p>
+          </div>
+        </article>
+
+        <article class="struggle-card">
+          <div>
+            <span class="struggle-tag">Transitions</span>
+            <h3 class="struggle-quote">"Switching tasks is painful."</h3>
+            <p class="text-muted" style="margin-top: var(--space-xs);">High mental resistance when stopping one activity to move to the next.</p>
+          </div>
+        </article>
+
+        <article class="struggle-card">
+          <div>
+            <span class="struggle-tag">Emotional regulation</span>
+            <h3 class="struggle-quote">"My emotions hit hard."</h3>
+            <p class="text-muted" style="margin-top: var(--space-xs);">Frustration, rejection sensitivity, or boredom instantly derail momentum.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     PHILOSOPHY SECTION
+     ========================================================================== -->
+  <section class="section bg-vanilla-light">
+    <div class="container">
+      <div class="text-center" style="max-width: 720px; margin: 0 auto;">
+        <span class="eyebrow eyebrow-terracotta">Our Core Philosophy</span>
+        <h2>It's not about trying harder.</h2>
+        <p class="lead" style="margin-top: var(--space-sm);">
+          Sometimes the problem isn't knowing what to do. It's having a system that works when your attention, energy, motivation or sense of time doesn't cooperate. DopaFix helps you understand the friction and gives you practical tools to work with it.
+        </p>
+      </div>
+
+      <div class="philosophy-grid">
+        <div class="step-card">
+          <span class="step-number">01</span>
+          <h3 class="step-title">Understand</h3>
+          <p>Map your specific executive function gaps without shame or self-criticism.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">02</span>
+          <h3 class="step-title">Experiment</h3>
+          <p>Test practical micro-frameworks designed specifically for low-dopamine states.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">03</span>
+          <h3 class="step-title">Build</h3>
+          <p>Construct sustainable external systems that support your brain long-term.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     FREE ASSESSMENT BANNER
+     ========================================================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="assessment-banner">
+        <div class="assessment-banner-content">
+          <span class="badge badge-terracotta" style="margin-bottom: var(--space-md);">SELF-REFLECTION TOOL</span>
+          <h2>What keeps getting in your way?</h2>
+          <p>Take a short self-reflection assessment and get a snapshot of the areas that may be creating the most friction in your day.</p>
+          
+          <div class="assessment-pills">
+            <span class="assessment-pill">10 questions</span>
+            <span class="assessment-pill">~3 minutes</span>
+            <span class="assessment-pill">Free</span>
+            <span class="assessment-pill">Not a diagnosis</span>
+          </div>
+
+          <a href="assessment.html" class="btn btn-primary btn-lg">Start Free Assessment</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     PRODUCT FEATURE SECTION
+     ========================================================================== -->
+  <section class="section bg-vanilla">
+    <div class="container">
+      <div class="text-center" style="max-width: 640px; margin: 0 auto var(--space-2xl);">
+        <span class="eyebrow">Practical Digital Tools</span>
+        <h2>Start with the problem.</h2>
+        <p class="lead">You don't need another generic productivity system. Start with the thing that's getting in your way.</p>
+      </div>
+
+      <div class="container-narrow">
+        <article class="product-card">
+          <div class="product-card-header">
+            <div>
+              <span class="badge badge-terracotta" style="margin-bottom: var(--space-xs);">START HERE</span>
+              <h3 class="product-card-title">The Newly Diagnosed ADHD Roadmap</h3>
+            </div>
+            <span class="product-card-price">€12.90</span>
+          </div>
+
+          <p class="product-card-description">
+            A practical roadmap for adults who are newly diagnosed with ADHD or beginning to understand how executive-function difficulties affect everyday life.
+          </p>
+
+          <div class="product-card-features">
+            <div class="product-card-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Executive dysfunction diagnostic checklist & friction mapper</span>
+            </div>
+            <div class="product-card-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Actionable strategies for task initiation and momentum building</span>
+            </div>
+            <div class="product-card-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Fillable PDF + printable workbook templates</span>
+            </div>
+          </div>
+
+          <div style="margin-top: var(--space-sm);">
+            <a href="product.html" class="btn btn-secondary btn-full">Explore the Roadmap</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     HOW IT WORKS SECTION
+     ========================================================================== -->
+  <section id="how-it-works" class="section bg-vanilla-light">
+    <div class="container">
+      <div class="text-center" style="max-width: 640px; margin: 0 auto var(--space-2xl);">
+        <span class="eyebrow">Framework Process</span>
+        <h2>How It Works</h2>
+        <p class="lead">A simple 3-stage process designed to eliminate friction without overwhelming your calendar.</p>
+      </div>
+
+      <div class="philosophy-grid">
+        <div class="card card-vanilla">
+          <span class="badge badge-green" style="align-self: flex-start; margin-bottom: var(--space-sm);">STAGE 01</span>
+          <h3 style="margin-bottom: var(--space-xs);">Identify</h3>
+          <p class="text-muted">Find the friction. Pinpoint the exact point where your workflow breaks down.</p>
+        </div>
+
+        <div class="card card-vanilla">
+          <span class="badge badge-green" style="align-self: flex-start; margin-bottom: var(--space-sm);">STAGE 02</span>
+          <h3 style="margin-bottom: var(--space-xs);">Understand</h3>
+          <p class="text-muted">Choose the tool. Match your specific executive function friction to a targeted toolkit.</p>
+        </div>
+
+        <div class="card card-vanilla">
+          <span class="badge badge-green" style="align-self: flex-start; margin-bottom: var(--space-sm);">STAGE 03</span>
+          <h3 style="margin-bottom: var(--space-xs);">Act</h3>
+          <p class="text-muted">Make the next step easier. Execute with minimal friction using low-energy initiation triggers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     FINAL CONVERSION CTA SECTION
+     ========================================================================== -->
+  <section class="section bg-green-dark text-center">
+    <div class="container container-narrow">
+      <span class="eyebrow eyebrow-terracotta" style="margin-bottom: var(--space-xs);">READY TO START?</span>
+      <h2 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: var(--space-md);">You don't need a better personality.<br>You might need a better system.</h2>
+      <p style="margin-bottom: var(--space-xl); color: var(--green-light);">Discover where your executive friction is coming from with our free self-assessment.</p>
+      
+      <div class="hero-actions" style="justify-content: center;">
+        <a href="assessment.html" class="btn btn-primary btn-lg">Take the Free Assessment</a>
+        <a href="shop.html" class="btn btn-outline-green btn-lg" style="color: var(--vanilla-light); border-color: rgba(255,255,255,0.3);">Explore Tools</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     SITE FOOTER
+     ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo footer-logo">
+            DopaFix<span class="logo-dot"></span>
+          </a>
+          <p class="footer-tagline">Practical tools for the things ADHD makes harder.</p>
+        </div>
+
+        <div class="footer-links-group">
+          <div>
+            <h4 class="footer-heading">Tools & Assessment</h4>
+            <nav class="footer-nav">
+              <a href="shop.html" class="footer-nav-link">Shop</a>
+              <a href="assessment.html" class="footer-nav-link">Assessment</a>
+              <a href="about.html" class="footer-nav-link">About</a>
+              <a href="faq.html" class="footer-nav-link">FAQ</a>
+            </nav>
+          </div>
+
+          <div>
+            <h4 class="footer-heading">Legal & Support</h4>
+            <nav class="footer-nav">
+              <a href="privacy.html" class="footer-nav-link">Privacy Policy</a>
+              <a href="terms.html" class="footer-nav-link">Terms of Service</a>
+              <a href="refund.html" class="footer-nav-link">Refund Policy</a>
+              <a href="contact.html" class="footer-nav-link">Contact</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-disclaimer">
+        <p>Disclaimer: DopaFix provides educational and self-reflection resources. Our assessments are not diagnostic tools and do not replace professional medical or mental-health advice.</p>
+        <p style="margin-top: var(--space-xs); opacity: 0.7;">&copy; 2026 DopaFix. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript Dependencies -->
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/navigation.js"></script>
+</body>
+</html>

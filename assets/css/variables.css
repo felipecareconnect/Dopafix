@@ -1,0 +1,140 @@
+/* ==========================================================================
+   DopaFix — Design System CSS Variables
+   Architecture: Foundation & Design Tokens
+   Palette Ratio Target: Vanilla/Beige (60%), Green (25%), Ink (10%), Terracotta (5%)
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------------
+     1. COLOR PALETTE (Design System Tokens)
+     ------------------------------------------------------------------------ */
+  
+  /* Greens (25% Usage) - Trust, Structure, Focus */
+  --green-primary: #3F7655;
+  --green-dark: #244936;
+  --green-light: #DCE9DE;
+  --green-subtle: #EDF3EE;
+
+  /* Vanilla & Beige (60% Usage) - Calm, Warmth, Low Visual Stress */
+  --vanilla: #F7F1E3;
+  --vanilla-light: #FBF8F0;
+  --beige: #E9DDC8;
+  --beige-muted: #F2EAD9;
+
+  /* Terracotta (5% Usage Accent) - Action, Intent, Gentle Energy */
+  --terracotta: #D9785F;
+  --terracotta-dark: #C05D44;
+  --terracotta-light: #E9A18D;
+  --terracotta-subtle: #F9ECE8;
+
+  /* Dark Text & Neutrals (10% Usage) - High Contrast & High Readability */
+  --ink: #202B25;
+  --ink-soft: #38463E;
+  --muted: #687169;
+  --muted-light: #A1A8A3;
+  
+  /* Pure Neutral Overlays */
+  --white: #FFFFFF;
+  --black-overlay: rgba(32, 43, 37, 0.4);
+
+  /* Functional & Interactive States */
+  --focus-ring: rgba(63, 118, 85, 0.4);
+  --error: #C94A4A;
+  --success: #2E6B47;
+
+  /* ------------------------------------------------------------------------
+     2. TYPOGRAPHY SYSTEM
+     ------------------------------------------------------------------------ */
+  --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Font Scale (Mobile-first responsive fluid hierarchy) */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-md: 1.125rem;   /* 18px */
+  --font-size-lg: 1.25rem;    /* 20px */
+  --font-size-xl: 1.5rem;     /* 24px */
+  --font-size-2xl: 2rem;      /* 32px */
+  --font-size-3xl: 2.5rem;    /* 40px */
+  --font-size-4xl: 3.25rem;   /* 52px */
+
+  /* Line Heights (Optimized for ADHD/Low Cognitive Load Reading) */
+  --line-height-tight: 1.15;
+  --line-height-heading: 1.25;
+  --line-height-body: 1.6;
+  --line-height-relaxed: 1.75;
+
+  /* Font Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extra-bold: 800;
+
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0em;
+  --letter-spacing-caps: 0.08em;
+
+  /* ------------------------------------------------------------------------
+     3. SPACING & LAYOUT SYSTEM
+     ------------------------------------------------------------------------ */
+  --space-2xs: 0.25rem;  /* 4px */
+  --space-xs: 0.5rem;    /* 8px */
+  --space-sm: 0.75rem;   /* 12px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4.5rem;   /* 72px */
+  --space-4xl: 6rem;     /* 96px */
+
+  /* Section Padding */
+  --section-padding-y-sm: 3rem;
+  --section-padding-y-md: 5rem;
+  --section-padding-y-lg: 7.5rem;
+
+  /* Container Widths */
+  --container-max-width: 1240px;
+  --container-narrow-width: 800px;
+  --container-reading-width: 680px;
+
+  /* ------------------------------------------------------------------------
+     4. BORDERS, RADII & SHADOWS (Tactile & Soft UI)
+     ------------------------------------------------------------------------ */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+
+  /* Borders */
+  --border-width-thin: 1px;
+  --border-width-thick: 2px;
+  --border-subtle: 1px solid rgba(32, 43, 37, 0.08);
+  --border-medium: 1px solid rgba(32, 43, 37, 0.15);
+  --border-green: 1px solid var(--green-primary);
+
+  /* Depth & Soft Elevation */
+  --shadow-sm: 0 2px 8px rgba(32, 43, 37, 0.04);
+  --shadow-md: 0 10px 30px rgba(32, 43, 37, 0.07);
+  --shadow-lg: 0 20px 45px rgba(32, 43, 37, 0.1);
+  --shadow-terracotta: 0 10px 25px rgba(217, 120, 95, 0.25);
+  --shadow-inner: inset 0 2px 4px rgba(32, 43, 37, 0.05);
+
+  /* ------------------------------------------------------------------------
+     5. TRANSITIONS & Z-INDEX HIERARCHY
+     ------------------------------------------------------------------------ */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+  --z-negative: -1;
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-sticky: 500;
+  --z-overlay: 900;
+  --z-modal: 1000;
+  --z-toast: 1100;
+}
